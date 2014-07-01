@@ -1,5 +1,6 @@
+import pandas
 import csv
-class dyplot():
+class Dyplot():
     def __init__(self, x, xname):
         self.x = x
         self.xname = xname
@@ -14,11 +15,9 @@ class dyplot():
             self.series[name]['m'] = mseries 
             self.series[name]['h'] = hseries 
     def annotate(self, a):
-        for i in a:
-            self.annotates.append(i) 
+        self.annotations.extend(a)
     def savefig(self, csv_file="dyplot.csv", div_id="dyplot", js_vid="g", dt_fmt="%Y-%m-%d", title=""):
         csv_series = []
-        print type(self.x[0])
         if type(self.x[0]) == pandas.tslib.Timestamp:
             csv_series.append([])
             for e in self.x:
@@ -85,7 +84,7 @@ class dyplot():
             div += '    {\n'
             div += '      series: "' + x.series + '",\n'
             div += '      x: "' + x.x + '",\n'
-            div += '      shortText: ' + x.shortText + ',\n'
+            div += '      shortText: "' + x.shortText + '",\n'
             div += '      text: "' + x.text + '",\n'
             div += '    },\n'
         div += '    ]);\n'
