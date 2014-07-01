@@ -1,4 +1,3 @@
-import datetime as dt
 import csv
 class dyplot():
     def __init__(self, x, xname):
@@ -19,7 +18,8 @@ class dyplot():
             self.annotates.append(i) 
     def savefig(self, csv_file="dyplot.csv", div_id="dyplot", js_vid="g", dt_fmt="%Y-%m-%d", title=""):
         csv_series = []
-        if type(self.x[0]) == dt.datetime:
+        print type(self.x[0])
+        if type(self.x[0]) == pandas.tslib.Timestamp:
             csv_series.append([])
             for e in self.x:
                 csv_series[0].append(e.strftime(dt_fmt))
@@ -36,27 +36,31 @@ class dyplot():
             names.append(s)
         lines = []
         lines.append(names)
-        for l in csv_series:
+        for i in range(len(csv_series[0])):
+            l = []
+            for series in csv_series:
+                l.append(series[i])
             lines.append(l)
         with open(csv_file, 'w') as fp:
             cw = csv.writer(fp, lineterminator='\n', delimiter=',', quoting = csv.QUOTE_NONE)
             for line in lines:
                 cw.writerow(line)
         snames = self.series.keys()
-        if type(snames[0]) == type({}):
-            max_value = max(self.snames[0].mseries.max(),self.snames[0].lseries.max(),self.snames[0].hseries.max())
-            min_value = min(self.snames[0].mseries.min(),self.snames[0].lseries.min(),self.snames[0].hseries.min())
+        n = snames[0]
+        if type(self.series[n]) == type({}):
+            max_value = max(self.series[n]["m"].max(),self.series[n]["l"].max(),self.series[n]["h"].max())
+            min_value = min(self.series[n]["m"].min(),self.series[n]["l"].min(),self.series[n]["h"].min())
         else:
-            max_value = self.snames[0].max()
-            min_value = self.snames[0].min()
-        snames.remove(snames[0])
+            max_value = self.series[n].max()
+            min_value = self.series[n].min()
+        snames.remove(n)
         for n in snames:
-            if type(names[n]) == type({}):
-                tmax = max(self.names[n].mseries.max(),self.names[n].lseries.max(),self.names[n].hseries.max())
-                tmin = min(self.names[n].mseries.min(),self.names[n].lseries.min(),self.names[n].hseries.min())
+            if type(self.series[n]) == type({}):
+                tmax = max(self.series[n]["m"].max(),self.series[n]["l"].max(),self.series[n]["h"].max())
+                tmin = min(self.series[n]["m"].min(),self.series[n]["l"].min(),self.series[n]["h"].min())
             else:
-                tmax = self.names[n].max()
-                tmin = self.names[n].min()
+                tmax = self.series[n].max()
+                tmin = self.series[n].min()
             if tmax > max_value:
                 max_value = tmax
             if tmin < min_value:
@@ -71,7 +75,7 @@ class dyplot():
         div += '  title: "' + title + '",\n'
         div += '  showRoller: true,\n'
         div += '  customBars: true,\n'
-        div += '  valueRange: [' + min_value + ',' + max_value + '],\n'
+        div += '  valueRange: [' + str(min_value) + ',' + str(max_value) + '],\n'
         div += '  ylabel: "Ratio",\n'
         div += '  }\n'
         div += '  );\n'
