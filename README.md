@@ -9,7 +9,7 @@ The series needs to be pandas.Series
 Short Example
 =====
     import pandas as pd
-    from dyplot import Dyplot
+    from dyplot.dyplot import Dyplot
     a = pd.Series([1,2,3,4,5,6,7,9,10])
     b = pd.Series([1,3,5,9,2,8,5,5,15])
     lc= pd.Series([1,3,4,5,6,7,9,3,2])
