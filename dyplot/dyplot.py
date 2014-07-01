@@ -16,7 +16,8 @@ class Dyplot():
             self.series[name]['h'] = hseries 
     def annotate(self, a):
         self.annotations.extend(a)
-    def savefig(self, csv_file="dyplot.csv", div_id="dyplot", js_vid="g", dt_fmt="%Y-%m-%d", title=""):
+    def savefig(self, csv_file="dyplot.csv", div_id="dyplot", js_vid="g", dt_fmt="%Y-%m-%d", title="", \
+        html_file=None, yname="Y Values"):
         csv_series = []
         if type(self.x[0]) == pandas.tslib.Timestamp:
             csv_series.append([])
@@ -75,7 +76,7 @@ class Dyplot():
         div += '  showRoller: true,\n'
         div += '  customBars: true,\n'
         div += '  valueRange: [' + str(min_value) + ',' + str(max_value) + '],\n'
-        div += '  ylabel: "Ratio",\n'
+        div += '  ylabel: "' + yname + '",\n'
         div += '  }\n'
         div += '  );\n'
         div += '  ' + js_vid + '.ready(function() {\n'
@@ -90,4 +91,19 @@ class Dyplot():
         div += '    ]);\n'
         div += '  });\n'
         div += '</script>\n'
+        if type(html_file) != type(None):
+            self.save_html(html_file, div)
         return div
+    def save_html(self, html_file, div):
+        header = """<html>
+<head>
+<script type="text/javascript"
+  src="/js/dygraph-combined.js"></script>
+</head><body>
+"""
+        footer = "</body></html>"
+        with open(html_file, 'w') as f:
+            f.write(header)
+            f.write(div)
+            f.write(footer)
+
