@@ -1,11 +1,11 @@
 dyplot
 ======
 matplotlib-like plot functions for dygraphs.js. See dygraphs.com for detail.
-If no html\_file is provided, then no html file will be generated.
+If no html_file is provided, then no html file will be generated.
 You can go to http://store-demo.appspot.com/temp.html to see the output of 
 the short example.
+https://github.com/blacksburg98/dyplot
 The series needs to be pandas.Series
-=====
 Short Example
 =====
     import pandas as pd
