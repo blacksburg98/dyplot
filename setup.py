@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='dyplot',
-    version='0.0.001',
+    version='0.1.001',
     author='Tsung-Han Yang',
     author_email='blacksburg98@yahoo.com',
     packages=['dyplot'],
