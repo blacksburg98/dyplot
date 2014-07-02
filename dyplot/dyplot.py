@@ -1,11 +1,18 @@
 import pandas
 import csv
+import json
 class Dyplot():
     def __init__(self, x, xname):
         self.x = x
         self.xname = xname
         self.series = {}
         self.annotations = []
+        self.option = {}
+        self.option["legend"] = 'always'
+        self.option["showRoller"] = True
+        self.option["customBars"] = True
+        self.option["title"] = ""
+        self.option["ylabel"] = "Y Values"
     def plot(self, name, mseries, lseries = None, hseries = None):
         if type(lseries) == type(None):
             self.series[name] = mseries
@@ -14,10 +21,19 @@ class Dyplot():
             self.series[name]['l'] = lseries 
             self.series[name]['m'] = mseries 
             self.series[name]['h'] = hseries 
-    def annotate(self, a):
-        self.annotations.extend(a)
-    def savefig(self, csv_file="dyplot.csv", div_id="dyplot", js_vid="g", dt_fmt="%Y-%m-%d", title="", \
-        html_file=None, yname="Y Values"):
+    def annotate(self, series, x, shortText, text=""):
+        a = {}
+        a["series"] = series
+        a["shortText"] = shortText
+        a["x"] = x
+        a["text"] = text
+        self.annotations.append(a)
+    def set_options(self, **kwargs):
+        if kwargs is not None:
+            for key, value in kwargs.iteritems():
+                self.option[key] = value
+    def savefig(self, csv_file="dyplot.csv", div_id="dyplot", js_vid="g", dt_fmt="%Y-%m-%d", \
+        html_file=None, width="1024px", height="600px"):
         csv_series = []
         if type(self.x[0]) == pandas.tslib.Timestamp:
             csv_series.append([])
@@ -65,30 +81,26 @@ class Dyplot():
                 max_value = tmax
             if tmin < min_value:
                 min_value = tmin
-        div = '<div id="' + div_id + '" style="width:1024px; height:600px;"></div>\n'
+            if max_value > 0:
+                max_value *= 1.1
+            else:
+                max_value *= 0.9
+            if min_value > 0:
+                min_value *= 0.9
+            else:
+                min_value *= 1.1
+        self.set_options(valueRange=[min_value,max_value])
+        div = '<div id="' + div_id + '" style="width:'+ width + '; height:' + height + ';"></div>\n'
         div += '<script type="text/javascript">\n'
         div += js_vid + ' = new Dygraph(\n'
         div += '    document.getElementById("' + div_id + '"),\n'
         div += '    "' + csv_file + '", // path to CSV file\n'
-        div += '  {\n'
-        div += "  legend: 'always',"
-        div += '  title: "' + title + '",\n'
-        div += '  showRoller: true,\n'
-        div += '  customBars: true,\n'
-        div += '  valueRange: [' + str(min_value) + ',' + str(max_value) + '],\n'
-        div += '  ylabel: "' + yname + '",\n'
-        div += '  }\n'
+        div += json.dumps(self.option)
         div += '  );\n'
         div += '  ' + js_vid + '.ready(function() {\n'
-        div += '    ' + js_vid + '.setAnnotations([\n'
-        for x in self.annotations:
-            div += '    {\n'
-            div += '      series: "' + x.series + '",\n'
-            div += '      x: "' + x.x + '",\n'
-            div += '      shortText: "' + x.shortText + '",\n'
-            div += '      text: "' + x.text + '",\n'
-            div += '    },\n'
-        div += '    ]);\n'
+        div += '    ' + js_vid + '.setAnnotations('
+        div += json.dumps(self.annotations)
+        div += '    );\n'
         div += '  });\n'
         div += '</script>\n'
         if type(html_file) != type(None):

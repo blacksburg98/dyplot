@@ -19,5 +19,6 @@ Short Example
     dg.plot(name="a", mseries=a)
     dg.plot(name="b", mseries=b)
     dg.plot(name="c", mseries=c,lseries=lc, hseries=hc)
-    div = dg.savefig(title="Test", html_file="temp.html")
+    dg.set_options(title="Test")
+    div = dg.savefig(html_file="tutorial1.html", csv_file="tutorial1.csv")
 
