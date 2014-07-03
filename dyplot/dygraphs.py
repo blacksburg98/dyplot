@@ -1,7 +1,7 @@
 import pandas
 import csv
 import json
-class Dyplot():
+class Dygraphs():
     def __init__(self, x, xname):
         self.x = x
         self.xname = xname
