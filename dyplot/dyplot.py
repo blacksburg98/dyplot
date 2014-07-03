@@ -13,7 +13,20 @@ class Dyplot():
         self.option["customBars"] = True
         self.option["title"] = ""
         self.option["ylabel"] = "Y Values"
-    def plot(self, name, mseries, lseries = None, hseries = None):
+        self.option["series"] = {}
+        self.option["axes"] = {}
+        self.option["axes"]['x'] = {}
+        self.option["axes"]['y'] = {}
+        self.option["axes"]['y2'] = {}
+        self.option["axes"]['y']['valueRange'] = []
+        self.option["axes"]['y2']['valueRange'] = []
+    def plot(self, name, mseries, lseries = None, hseries = None, **kwargs):
+        if name not in self.option["series"]:
+            self.option["series"][name] = {}
+        self.option["series"][name]["axis"] = 'y'
+        if kwargs is not None:
+            for key, value in kwargs.iteritems():
+                self.option["series"][name][key] = value
         if type(lseries) == type(None):
             self.series[name] = mseries
         else:
@@ -28,12 +41,46 @@ class Dyplot():
         a["x"] = x
         a["text"] = text
         self.annotations.append(a)
+    def set_axis_options(self, axis, **kwargs):
+        if kwargs is not None:
+            for key, value in kwargs.iteritems():
+                self.option['axes'][axis][key] = value
     def set_options(self, **kwargs):
         if kwargs is not None:
             for key, value in kwargs.iteritems():
                 self.option[key] = value
-    def savefig(self, csv_file="dyplot.csv", div_id="dyplot", js_vid="g", dt_fmt="%Y-%m-%d", \
-        html_file=None, width="1024px", height="600px"):
+    def auto_range(self, axis="y"):
+        snames = self.series.keys()
+        anames = [x for x in snames if self.option["series"][x]["axis"] == axis] 
+        n = anames[0]
+        if type(self.series[n]) == type({}):
+            max_value = max(self.series[n]["m"].max(),self.series[n]["l"].max(),self.series[n]["h"].max())
+            min_value = min(self.series[n]["m"].min(),self.series[n]["l"].min(),self.series[n]["h"].min())
+        else:
+            max_value = self.series[n].max()
+            min_value = self.series[n].min()
+        anames.remove(n)
+        for n in anames:
+            if type(self.series[n]) == type({}):
+                tmax = max(self.series[n]["m"].max(),self.series[n]["l"].max(),self.series[n]["h"].max())
+                tmin = min(self.series[n]["m"].min(),self.series[n]["l"].min(),self.series[n]["h"].min())
+            else:
+                tmax = self.series[n].max()
+                tmin = self.series[n].min()
+            if tmax > max_value:
+                max_value = tmax
+            if tmin < min_value:
+                min_value = tmin
+        if max_value > 0:
+            max_value *= 1.1
+        else:
+            max_value *= 0.9
+        if min_value > 0:
+            min_value *= 0.9
+        else:
+            min_value *= 1.1
+        self.option['axes'][axis]['valueRange'] = [min_value, max_value]
+    def save_csv(self, csv_file, dt_fmt):
         csv_series = []
         if type(self.x[0]) == pandas.tslib.Timestamp:
             csv_series.append([])
@@ -61,35 +108,13 @@ class Dyplot():
             cw = csv.writer(fp, lineterminator='\n', delimiter=',', quoting = csv.QUOTE_NONE)
             for line in lines:
                 cw.writerow(line)
-        snames = self.series.keys()
-        n = snames[0]
-        if type(self.series[n]) == type({}):
-            max_value = max(self.series[n]["m"].max(),self.series[n]["l"].max(),self.series[n]["h"].max())
-            min_value = min(self.series[n]["m"].min(),self.series[n]["l"].min(),self.series[n]["h"].min())
-        else:
-            max_value = self.series[n].max()
-            min_value = self.series[n].min()
-        snames.remove(n)
-        for n in snames:
-            if type(self.series[n]) == type({}):
-                tmax = max(self.series[n]["m"].max(),self.series[n]["l"].max(),self.series[n]["h"].max())
-                tmin = min(self.series[n]["m"].min(),self.series[n]["l"].min(),self.series[n]["h"].min())
-            else:
-                tmax = self.series[n].max()
-                tmin = self.series[n].min()
-            if tmax > max_value:
-                max_value = tmax
-            if tmin < min_value:
-                min_value = tmin
-            if max_value > 0:
-                max_value *= 1.1
-            else:
-                max_value *= 0.9
-            if min_value > 0:
-                min_value *= 0.9
-            else:
-                min_value *= 1.1
-        self.set_options(valueRange=[min_value,max_value])
+    def savefig(self, csv_file="dyplot.csv", div_id="dyplot", js_vid="g", dt_fmt="%Y-%m-%d", \
+        html_file=None, width="1024px", height="600px"):
+        self.save_csv(csv_file, dt_fmt)
+        if self.option['axes']['y']['valueRange'] == []:
+            self.auto_range(axis='y')
+        if self.option['axes']['y2']['valueRange'] == []:
+            self.auto_range(axis='y2')
         div = '<div id="' + div_id + '" style="width:'+ width + '; height:' + height + ';"></div>\n'
         div += '<script type="text/javascript">\n'
         div += js_vid + ' = new Dygraph(\n'

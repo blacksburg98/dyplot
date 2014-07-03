@@ -17,7 +17,7 @@ if __name__ == '__main__':
     ldt_timestamps = du.getNYSEdays(dt_start, dt_end, dt_timeofday)
     all_stocks = get_tickdata(ls_symbols=ls_symbols, ldt_timestamps=ldt_timestamps)
     dg = Dyplot(ldt_timestamps, "date") 
-    for tick in ls_symbols:
-        dg.plot(name=tick, mseries=all_stocks[tick]['close'])
+    dg.plot(name="AAPL", mseries=all_stocks["AAPL"]['close'], axis='y2')
+    dg.plot(name="$RUA", mseries=all_stocks["$RUA"]['close'])
     dg.set_options(title="Tutorial 3")
     div = dg.savefig(csv_file="tutorial3.csv", html_file="tutorial3.html")
