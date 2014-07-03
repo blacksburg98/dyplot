@@ -20,20 +20,20 @@ class Dyplot():
         self.option["axes"]['y2'] = {}
         self.option["axes"]['y']['valueRange'] = []
         self.option["axes"]['y2']['valueRange'] = []
-    def plot(self, name, mseries, lseries = None, hseries = None, **kwargs):
-        if name not in self.option["series"]:
-            self.option["series"][name] = {}
-        self.option["series"][name]["axis"] = 'y'
+    def plot(self, series, mseries, lseries = None, hseries = None, **kwargs):
+        if series not in self.option["series"]:
+            self.option["series"][series] = {}
+        self.option["series"][series]["axis"] = 'y'
         if kwargs is not None:
             for key, value in kwargs.iteritems():
-                self.option["series"][name][key] = value
+                self.option["series"][series][key] = value
         if type(lseries) == type(None):
-            self.series[name] = mseries
+            self.series[series] = mseries
         else:
-            self.series[name] = {}
-            self.series[name]['l'] = lseries 
-            self.series[name]['m'] = mseries 
-            self.series[name]['h'] = hseries 
+            self.series[series] = {}
+            self.series[series]['l'] = lseries 
+            self.series[series]['m'] = mseries 
+            self.series[series]['h'] = hseries 
     def annotate(self, series, x, shortText, text=""):
         a = {}
         a["series"] = series
@@ -45,6 +45,10 @@ class Dyplot():
         if kwargs is not None:
             for key, value in kwargs.iteritems():
                 self.option['axes'][axis][key] = value
+    def set_series_options(self, series, **kwargs):
+        if kwargs is not None:
+            for key, value in kwargs.iteritems():
+                self.option['series'][series][key] = value
     def set_options(self, **kwargs):
         if kwargs is not None:
             for key, value in kwargs.iteritems():
@@ -52,6 +56,8 @@ class Dyplot():
     def auto_range(self, axis="y"):
         snames = self.series.keys()
         anames = [x for x in snames if self.option["series"][x]["axis"] == axis] 
+        if anames == []:
+            return
         n = anames[0]
         if type(self.series[n]) == type({}):
             max_value = max(self.series[n]["m"].max(),self.series[n]["l"].max(),self.series[n]["h"].max())

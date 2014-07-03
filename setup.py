@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='dyplot',
-    version='0.1.001',
+    version='0.6.000',
     author='Tsung-Han Yang',
     author_email='blacksburg98@yahoo.com',
     packages=['dyplot'],
@@ -17,6 +17,7 @@ setup(
         "Topic :: Text Processing :: Markup :: HTML",
         "Topic :: Software Development :: Code Generators",
         "Topic :: Scientific/Engineering :: Visualization",
+        "Programming Language :: JavaScript",
     ],
 )
 

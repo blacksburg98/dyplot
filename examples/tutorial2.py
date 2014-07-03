@@ -1,10 +1,3 @@
-
-"""
-Tutorial 2 
-Load stock data and print 
-"""
-import matplotlib
-matplotlib.use('Agg') # fix for matplotlib under multiprocessing
 import datetime as dt
 from finpy.utils import get_tickdata
 import finpy.fpdateutil as du
@@ -18,6 +11,6 @@ if __name__ == '__main__':
     all_stocks = get_tickdata(ls_symbols=ls_symbols, ldt_timestamps=ldt_timestamps)
     dg = Dyplot(ldt_timestamps, "date") 
     for tick in ls_symbols:
-        dg.plot(name=tick, mseries=all_stocks[tick].normalized())
+        dg.plot(series=tick, mseries=all_stocks[tick].normalized())
     dg.set_options(title="Tutorial 2")
     div = dg.savefig(csv_file="tutorial2.csv", html_file="tutorial2.html")

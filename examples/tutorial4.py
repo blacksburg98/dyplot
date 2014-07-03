@@ -1,4 +1,3 @@
-
 import datetime as dt
 from finpy.utils import get_tickdata
 import finpy.fpdateutil as du
@@ -13,5 +12,13 @@ if __name__ == '__main__':
     dg = Dyplot(ldt_timestamps, "date") 
     dg.plot(series="AAPL", mseries=all_stocks["AAPL"]['close'], axis='y2')
     dg.plot(series="$RUA", mseries=all_stocks["$RUA"]['close'])
-    dg.set_options(title="Tutorial 3")
-    div = dg.savefig(csv_file="tutorial3.csv", html_file="tutorial3.html")
+    max_ratio = max(all_stocks["AAPL"].normalized().max(), all_stocks["$RUA"].normalized().max())
+    min_ratio = min(all_stocks["AAPL"].normalized().min(), all_stocks["$RUA"].normalized().min())
+    max_ratio *= 1.05
+    min_ratio *= 0.95
+    dg.set_axis_options(axis='y', valueRange=[all_stocks["$RUA"]['close'][0]*min_ratio, \
+        all_stocks["$RUA"]['close'][0]*max_ratio])
+    dg.set_axis_options(axis='y2', valueRange=[all_stocks["AAPL"]['close'][0]*min_ratio, \
+        all_stocks["AAPL"]['close'][0]*max_ratio])
+    dg.set_options(title="Tutorial 4")
+    div = dg.savefig(csv_file="tutorial4.csv")
