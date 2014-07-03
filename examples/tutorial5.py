@@ -11,7 +11,7 @@ if __name__ == '__main__':
     all_stocks = get_tickdata(ls_symbols=ls_symbols, ldt_timestamps=ldt_timestamps)
     dg = Dyplot(ldt_timestamps, "date") 
     dg.plot(series="AAPL", mseries=all_stocks["AAPL"]['close'], axis='y2')
-    dg.plot(series="$RUA", mseries=all_stocks["$RUA"]['close'])
+    dg.plot(series="Russel 3000", mseries=all_stocks["$RUA"]['close'])
     max_ratio = max(all_stocks["AAPL"].normalized().max(), all_stocks["$RUA"].normalized().max())
     min_ratio = min(all_stocks["AAPL"].normalized().min(), all_stocks["$RUA"].normalized().min())
     max_ratio *= 1.05
@@ -20,5 +20,7 @@ if __name__ == '__main__':
         all_stocks["$RUA"]['close'][0]*max_ratio])
     dg.set_axis_options(axis='y2', valueRange=[all_stocks["AAPL"]['close'][0]*min_ratio, \
         all_stocks["AAPL"]['close'][0]*max_ratio])
-    dg.set_options(title="Tutorial 4")
-    div = dg.savefig(csv_file="tutorial4.csv", html_file="tutorail4.html")
+    dg.annotate('AAPL', '2010-06-21', "B", "Buy on 2010-06-21")
+    dg.annotate('AAPL', '2010-08-13', "S", "Sell on 2010-08-13")
+    dg.set_options(title="Tutorial 5", ylabel="Russel 3000", y2label="AAPL")
+    div = dg.savefig(csv_file="tutorial5.csv", html_file="tutorial5.html")
