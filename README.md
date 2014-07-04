@@ -10,6 +10,7 @@ Tutorial 1.
 ===========
 See the output at http://store-demo.appspot.com/tutorial/tutorial1.html 
 ::
+
     import pandas as pd
     from dyplot.dygraphs import Dygraphs
     a = pd.Series([1,2,3,4,5,6,7,9,10])
@@ -27,7 +28,8 @@ See the output at http://store-demo.appspot.com/tutorial/tutorial1.html
 Tutorial 2. 
 ===========
 See the output at http://store-demo.appspot.com/tutorial/tutorial2.html 
-:: 
+::
+
     import datetime as dt
     from finpy.utils import get_tickdata
     import finpy.fpdateutil as du
@@ -47,7 +49,8 @@ See the output at http://store-demo.appspot.com/tutorial/tutorial2.html
 Tutorial 3. 
 ===========
 See the output at http://store-demo.appspot.com/tutorial/tutorial3.html 
-:: 
+::
+
     import datetime as dt
     from finpy.utils import get_tickdata
     import finpy.fpdateutil as du
@@ -68,6 +71,7 @@ Tutorial 4.
 ===========
 See the output at http://store-demo.appspot.com/tutorial/tutorial4.html 
 :: 
+
     import datetime as dt
     from finpy.utils import get_tickdata
     import finpy.fpdateutil as du
