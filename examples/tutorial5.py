@@ -1,4 +1,4 @@
-from dyplot.c3.general import General as c3General
+from dyplot.c3.core import Core as c3Core
 columns = []
 columns.append(["setosa", 30])
 columns.append(["versicolor", 20])
@@ -14,8 +14,8 @@ axis["y"]["label"] = 'Pepal.Width'
 option = {}
 option["data"] = data
 option["axis"] = axis
-g = c3General(option)
+g = c3Core(option)
 c = []
 c.append(["setosa", 100])
 g.animate("load", c, 1000)
-g.savefig(html_file="general.html")
+g.savefig(html_file="core.html")

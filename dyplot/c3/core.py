@@ -1,5 +1,5 @@
 import json
-class General():
+class Core():
     def __init__(self, option):
         """
         options needs to be a structure like the argument of c3.generate.
@@ -24,11 +24,11 @@ class General():
         div += js_vid + ' = c3.generate(\n'
         div += json.dumps(self.option)
         div += '  );\n'
-        div += '</script>\n'
         for a in self.animation:
             div += "setTimeout(function () {" + js_vid + "." + a["action"]
-            div += json.dumps(a["columns"]) + ');\n'
+            div += json.dumps(a["columns"]) 
             div += '},' + str(a["time"]) + ');\n' 
+        div += '</script>\n'
         if type(html_file) != type(None):
             self.save_html(html_file, div)
         return div
