@@ -8,10 +8,10 @@ class Core():
         self.animation = []
     def dump_option(self):
         return self.option
-    def animate(self, action, columns, time):
+    def animate(self, action, arguments, time):
         a = {}
         a["action"] = action
-        a["columns"] = columns
+        a["arguments"] = arguments
         a["time"] = time
         self.animation.append(a)
     def savefig(self, div_id="c3general", js_vid="g", html_file=None, width="400px", height="300px"):
@@ -25,8 +25,8 @@ class Core():
         div += json.dumps(self.option)
         div += '  );\n'
         for a in self.animation:
-            div += "setTimeout(function () {" + js_vid + "." + a["action"]
-            div += json.dumps(a["columns"]) 
+            div += "setTimeout(function () {" + js_vid + "." + a["action"] + "("
+            div += json.dumps(a["arguments"]) + ');\n'
             div += '},' + str(a["time"]) + ');\n' 
         div += '</script>\n'
         if type(html_file) != type(None):
