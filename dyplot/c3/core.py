@@ -1,6 +1,6 @@
 import json
 class Core():
-    def __init__(self, option):
+    def __init__(self, option={}):
         """
         options needs to be a structure like the argument of c3.generate.
         """

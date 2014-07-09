@@ -6,14 +6,8 @@ columns.append(["vigginica", 50])
 data = {}
 data["columns"] = columns
 data["type"] = "pie"
-axis = {}
-axis["x"] = {}
-axis["y"] = {}
-axis["x"]["label"] = 'Sepal.Width'
-axis["y"]["label"] = 'Pepal.Width'
 option = {}
 option["data"] = data
-option["axis"] = axis
 g = c3Core(option)
 c = {}
 c["columns"] = []
