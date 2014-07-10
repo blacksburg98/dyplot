@@ -22,5 +22,5 @@ if __name__ == '__main__':
         all_stocks["AAPL"]['close'][0]*max_ratio])
     dg.annotate('AAPL', '2010-06-21', "B", "Buy on 2010-06-21")
     dg.annotate('AAPL', '2010-08-13', "S", "Sell on 2010-08-13")
-    dg.set_options(title="Tutorial 5", ylabel="Russel 3000", y2label="AAPL")
+    dg.set_options(title="Tutorial 4", ylabel="Russel 3000", y2label="AAPL")
     div = dg.savefig(csv_file="tutorial4.csv", html_file="tutorial4.html")
