@@ -1,14 +1,7 @@
-from dyplot.c3.core import Core as c3Core
-columns = []
-columns.append(["setosa", 30])
-columns.append(["versicolor", 20])
-columns.append(["vigginica", 50])
-data = {}
-data["columns"] = columns
-data["type"] = "pie"
-option = {}
-option["data"] = data
-g = c3Core(option)
+from dyplot.c3.pie import Pie
+frac = [30, 20, 50]
+labels = ["setosa", "versicolor", "viginica"]
+g = Pie(frac=frac, labels=labels)
 c = {}
 c["columns"] = []
 c["columns"].append(["setosa", 100])

@@ -5,6 +5,11 @@ class Core():
         options needs to be a structure like the argument of c3.generate.
         """
         self.option = option
+        self.option["axis"] = {}
+        self.option["axis"]["x"] = {}
+        self.option["axis"]["y"] = {}
+        self.option["data"] = {}
+        self.option["data"]["columns"] = []
         self.animation = []
     def dump_option(self):
         return self.option

@@ -1,6 +1,7 @@
 dyplot
 ======
-matplotlib-like plot functions for dygraphs.js. See dygraphs.com for detail.
+matplotlib-like plot functions for dygraphs.js c3.js. 
+See dygraphs.com and c3js.org for detail.
 Interactive out of the box: zoom, pan and mouseover are on by default.
 Drag your mouse to zoom in and double click to zoom out.
 You can clone the source code from 
@@ -101,26 +102,30 @@ Tutorial 5.
 See the output at http://store-demo.appspot.com/tutorial/tutorial5.html 
 ::
 
-
-    from dyplot.c3.general import General as c3General
-    columns = []
-    columns.append(["setosa", 30])
-    columns.append(["versicolor", 20])
-    columns.append(["vigginica", 50])
-    data = {}
-    data["columns"] = columns
-    data["type"] = "pie"
-    axis = {}
-    axis["x"] = {}
-    axis["y"] = {}
-    axis["x"]["label"] = 'Sepal.Width'
-    axis["y"]["label"] = 'Pepal.Width'
-    option = {}
-    option["data"] = data
-    option["axis"] = axis
-    g = c3General(option)
+    from dyplot.c3.pie import Pie
+    frac = [30, 20, 50]
+    labels = ["setosa", "versicolor", "viginica"]
+    g = Pie(frac=frac, labels=labels)
     c = {}
     c["columns"] = []
     c["columns"].append(["setosa", 100])
     g.animate("load", c, 1000)
     g.savefig(html_file="tutorial5.html")
+Tutorial 6. 
+===========
+See the output at http://store-demo.appspot.com/tutorial/tutorial6.html 
+::
+
+    from dyplot.c3.bar import Bar
+    h = [30, 20, 50, 40]
+    label = "setosa"
+    g = Bar(height=h, label=label)
+    h2 = [50, 30, 20, 30]
+    label2 = "barora"
+    h3 = [40, 20, 10, 50]
+    label3 = "exama"
+    g = Bar(height=h, label=label)
+    g(height=h2, label=label2)
+    g(height=h3, label=label3)
+    g.set_xticklabels(["G1", "G2", "G3", "G4"])
+    g.savefig(html_file="tutorial6.html")
