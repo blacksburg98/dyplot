@@ -50,3 +50,6 @@ class Core():
             f.write(header)
             f.write(div)
             f.write(footer)
+    def set_xticklabels(self, labels, t=""):
+        self.option["axis"]["x"]["type"] = t
+        self.option["axis"]["x"]["categories"] = labels

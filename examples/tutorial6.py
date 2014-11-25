@@ -9,5 +9,5 @@ label3 = "exama"
 g = Bar(height=h, label=label)
 g(height=h2, label=label2)
 g(height=h3, label=label3)
-g.set_xticklabels(["G1", "G2", "G3", "G4"])
+g.set_xticklabels(["G1", "G2", "G3", "G4"], "category")
 g.savefig(html_file="tutorial6.html")
