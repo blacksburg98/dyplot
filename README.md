@@ -95,7 +95,7 @@ See the output at http://store-demo.appspot.com/tutorial/tutorial4.html
             all_stocks["$RUA"]['close'][0]*max_ratio])
         dg.set_axis_options(axis='y2', valueRange=[all_stocks["AAPL"]['close'][0]*min_ratio, \
             all_stocks["AAPL"]['close'][0]*max_ratio])
-        dg.set_options(title="Tutorial 4")
+        dg.set_options(title="Tutorial 5", ylabel="Russel 3000", y2label="AAPL")
         div = dg.savefig(csv_file="tutorial4.csv", html_file="tutorail4.html")
 Tutorial 5. 
 ===========

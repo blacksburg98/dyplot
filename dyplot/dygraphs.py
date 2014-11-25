@@ -9,7 +9,7 @@ class Dygraphs():
         self.annotations = []
         self.option = {}
         self.option["legend"] = 'always'
-        self.option["showRoller"] = True
+        self.option["showRoller"] = False
         self.option["customBars"] = True
         self.option["title"] = ""
         self.option["ylabel"] = "Y Values"
