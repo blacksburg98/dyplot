@@ -25,7 +25,7 @@ class Dygraphs():
             self.option["series"][series] = {}
         self.option["series"][series]["axis"] = 'y'
         if kwargs is not None:
-            for key, value in kwargs.iteritems():
+            for key, value in kwargs.items():
                 self.option["series"][series][key] = value
         if type(lseries) == type(None):
             self.series[series] = mseries
@@ -43,15 +43,15 @@ class Dygraphs():
         self.annotations.append(a)
     def set_axis_options(self, axis, **kwargs):
         if kwargs is not None:
-            for key, value in kwargs.iteritems():
+            for key, value in kwargs.items():
                 self.option['axes'][axis][key] = value
     def set_series_options(self, series, **kwargs):
         if kwargs is not None:
-            for key, value in kwargs.iteritems():
+            for key, value in kwargs.items():
                 self.option['series'][series][key] = value
     def set_options(self, **kwargs):
         if kwargs is not None:
-            for key, value in kwargs.iteritems():
+            for key, value in kwargs.items():
                 self.option[key] = value
     def auto_range(self, axis="y"):
         snames = self.series.keys()
