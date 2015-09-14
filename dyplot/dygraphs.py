@@ -93,7 +93,7 @@ class Dygraphs():
             for e in self.x:
                 csv_series[0].append(e.strftime(dt_fmt))
         else:
-            csv_series.append(map(str, self.x))
+            csv_series.append(list(map(str, self.x)))
         names = []
         names.append(self.xname)
         for s in self.series:
@@ -115,8 +115,10 @@ class Dygraphs():
             for line in lines:
                 cw.writerow(line)
     def savefig(self, csv_file="dyplot.csv", div_id="dyplot", js_vid="g", dt_fmt="%Y-%m-%d", \
-        html_file=None, width="1024px", height="600px"):
+        html_file=None, width="1024px", height="600px", url_path=""):
         self.save_csv(csv_file, dt_fmt)
+        if url_path == "":
+            url_path = csv_file
         if self.option['axes']['y']['valueRange'] == []:
             self.auto_range(axis='y')
         if self.option['axes']['y2']['valueRange'] == []:
@@ -125,7 +127,7 @@ class Dygraphs():
         div += '<script type="text/javascript">\n'
         div += js_vid + ' = new Dygraph(\n'
         div += '    document.getElementById("' + div_id + '"),\n'
-        div += '    "' + csv_file + '", // path to CSV file\n'
+        div += '    "' + url_path + '", // path to CSV file\n'
         div += json.dumps(self.option)
         div += '  );\n'
         div += '  ' + js_vid + '.ready(function() {\n'
