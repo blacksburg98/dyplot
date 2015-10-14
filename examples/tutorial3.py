@@ -1,6 +1,6 @@
 
 import datetime as dt
-from finpy.utils import get_tickdata
+from finpy.equity import get_tickdata
 import finpy.fpdateutil as du
 from dyplot.dygraphs import Dygraphs
 if __name__ == '__main__':
