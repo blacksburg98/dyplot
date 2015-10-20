@@ -7,6 +7,7 @@ class Dygraphs():
         self.xname = xname
         self.series = {}
         self.annotations = []
+        self.candle = False
         self.option = {}
         self.option["legend"] = 'always'
         self.option["showRoller"] = False
@@ -34,6 +35,26 @@ class Dygraphs():
             self.series[series]['l'] = lseries 
             self.series[series]['m'] = mseries 
             self.series[series]['h'] = hseries 
+    def candleplot(self, open, close, high, low, **kwargs):
+        """
+        Candle sticks plot function for stock analysis.
+        All four arguments, open, close, high and low, are mandatory.
+        """
+        if self.candle == True:
+            print("Overwrite the previous candle plot.")
+            print("Only one candle stick plot is allowed.")
+        self.series["open"] = open
+        self.series["high"] = high
+        self.series["low"] = low
+        self.series["close"] = close
+        self.set_options(plotter="candlePlotter")
+        self.set_options(customBars=False)
+        if kwargs is not None:
+            for key, value in kwargs.items():
+                self.option["series"]["open"][key] = value
+                self.option["series"]["high"][key] = value
+                self.option["series"]["low"][key] = value
+                self.option["series"]["close"][key] = value
     def annotate(self, series, x, shortText, text=""):
         a = {}
         a["series"] = series
@@ -96,12 +117,21 @@ class Dygraphs():
             csv_series.append(list(map(str, self.x)))
         names = []
         names.append(self.xname)
+        if self.option["plotter"]== "candlePlotter":
+            candle_list = ["open", "high", "low", "close"]
+            names.extend(candle_list)
+            for c in candle_list:
+                csv_series.append(self.series[c].map(str))
+                self.series = {key: value for key, value in self.series.items() if key != c}
         for s in self.series:
             if type(self.series[s]) == type({}):
                 csv_series.append(self.series[s]['l'].map(str) + ";" + self.series[s]['m'].map(str) + ";" \
                     + self.series[s]['h'].map(str))
             else:
-                csv_series.append(";" + self.series[s].map(str) + ";")
+                if self.option["plotter"]== "candlePlotter":
+                    csv_series.append(self.series[s].map(str))
+                else:
+                    csv_series.append(";" + self.series[s].map(str) + ";")
             names.append(s)
         lines = []
         lines.append(names)
@@ -123,12 +153,14 @@ class Dygraphs():
             self.auto_range(axis='y')
         if self.option['axes']['y2']['valueRange'] == []:
             self.auto_range(axis='y2')
+        options = json.dumps(self.option)
+        options = options.replace('"candlePlotter"', 'candlePlotter')
         div = '<div id="' + div_id + '" style="width:'+ width + '; height:' + height + ';"></div>\n'
         div += '<script type="text/javascript">\n'
         div += js_vid + ' = new Dygraph(\n'
         div += '    document.getElementById("' + div_id + '"),\n'
         div += '    "' + url_path + '", // path to CSV file\n'
-        div += json.dumps(self.option)
+        div += options
         div += '  );\n'
         div += '  ' + js_vid + '.ready(function() {\n'
         div += '    ' + js_vid + '.setAnnotations('
@@ -142,8 +174,8 @@ class Dygraphs():
     def save_html(self, html_file, div):
         header = """<html>
 <head>
-<script type="text/javascript"
-  src="/js/dygraph-combined.js"></script>
+<script type="text/javascript" src="/js/dygraph-combined-dev.js"></script>
+<script type="text/javascript" src="/js/dyplot.js"></script>
 </head><body>
 """
         footer = "</body></html>"
