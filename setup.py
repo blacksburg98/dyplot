@@ -5,7 +5,7 @@ __currdir__ = os.getcwd()
 __readme__ = os.path.join(__currdir__, 'README.txt')
 setup(
     name='dyplot',
-    version='0.7.9',
+    version='0.7.10',
     author='Tsung-Han Yang',
     author_email='blacksburg98@yahoo.com',
     packages=find_packages(),
