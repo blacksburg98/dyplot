@@ -10,9 +10,8 @@ if __name__ == '__main__':
     dt_end = dt.datetime(2014, 12, 31)
     ls_symbols = ['AAPL']
     ldt_timestamps = du.getNYSEdays(dt_start, dt_end, dt_timeofday)
-    all_stocks = get_tickdata(ls_symbols=ls_symbols, ldt_timestamps=ldt_timestamps)
+    all_stocks = get_tickdata(ls_symbols=ls_symbols, ldt_timestamps=ldt_timestamps, source="Google")
     p = Portfolio(all_stocks, 0, ldt_timestamps) 
-    p.normalized_price(tick="AAPL")
     dg = Dygraphs(ldt_timestamps, "date") 
     dg.candleplot(open=p.equities["AAPL"]['open'],
                   high=p.equities["AAPL"]['high'],
