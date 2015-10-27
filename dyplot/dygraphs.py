@@ -117,7 +117,7 @@ class Dygraphs():
             csv_series.append(list(map(str, self.x)))
         names = []
         names.append(self.xname)
-        if self.option["plotter"]== "candlePlotter":
+        if "plotter" in self.option and self.option["plotter"]== "candlePlotter":
             candle_list = ["open", "high", "low", "close"]
             names.extend(candle_list)
             for c in candle_list:
@@ -128,7 +128,7 @@ class Dygraphs():
                 csv_series.append(self.series[s]['l'].map(str) + ";" + self.series[s]['m'].map(str) + ";" \
                     + self.series[s]['h'].map(str))
             else:
-                if self.option["plotter"]== "candlePlotter":
+                if "plotter" in self.option and  self.option["plotter"]== "candlePlotter":
                     csv_series.append(self.series[s].map(str))
                 else:
                     csv_series.append(";" + self.series[s].map(str) + ";")
