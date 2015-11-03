@@ -128,7 +128,7 @@ class Dygraphs():
                 csv_series.append(self.series[s]['l'].map(str) + ";" + self.series[s]['m'].map(str) + ";" \
                     + self.series[s]['h'].map(str))
             else:
-                if "plotter" in self.option and  self.option["plotter"]== "candlePlotter":
+                if "plotter" in self.option and self.option["plotter"]== "candlePlotter":
                     csv_series.append(self.series[s].map(str))
                 else:
                     csv_series.append(";" + self.series[s].map(str) + ";")
