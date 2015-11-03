@@ -1,7 +1,7 @@
 
 import datetime as dt
-from finpy.equity import get_tickdata
-import finpy.fpdateutil as du
+from finpy.financial.equity import get_tickdata
+import finpy.utils.fpdateutil as du
 from dyplot.dygraphs import Dygraphs
 if __name__ == '__main__':
     dt_timeofday = dt.timedelta(hours=16)
