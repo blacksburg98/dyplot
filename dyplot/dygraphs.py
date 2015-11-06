@@ -2,7 +2,15 @@ import pandas
 import csv
 import json
 class Dygraphs():
+    """ matplotlib-like plot functions for dygraphs.js and c3.js.
+        Dygraph.py makes it easier to integrate dygraphs.js into webpage.
+        Pleas see dygaphs.com for dygraphs.py.
+    """
     def __init__(self, x, xname):
+        """
+            :param x: x-axis. index list from pandas.
+            :param xname: x-axis name.
+        """
         self.x = x
         self.xname = xname
         self.series = {}
@@ -22,6 +30,15 @@ class Dygraphs():
         self.option["axes"]['y']['valueRange'] = []
         self.option["axes"]['y2']['valueRange'] = []
     def plot(self, series, mseries, lseries = None, hseries = None, **kwargs):
+        """ plot the series.
+                :param series: Series name
+                :param mseries: The main series. A pandas series.
+                :param lseries: The low series. 
+                    If specified, dygraphs will shade the space between the main series and the low series.
+                :param hseries: The high series. 
+                    If specified, dygraphs will shade the space between the main series and the high series.
+            The rest of series option can be set if needed.
+        """
         if series not in self.option["series"]:
             self.option["series"][series] = {}
         self.option["series"][series]["axis"] = 'y'
@@ -36,9 +53,12 @@ class Dygraphs():
             self.series[series]['m'] = mseries 
             self.series[series]['h'] = hseries 
     def candleplot(self, open, close, high, low, **kwargs):
-        """
-        Candle sticks plot function for stock analysis.
-        All four arguments, open, close, high and low, are mandatory.
+        """ Candle sticks plot function for stock analysis.
+            All four arguments, open, close, high and low, are mandatory.
+            :param open: open price 
+            :param close: close price 
+            :param high: high price 
+            :param low: low price 
         """
         if self.candle == True:
             print("Overwrite the previous candle plot.")
