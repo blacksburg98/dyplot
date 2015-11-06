@@ -3,3 +3,4 @@
 dist/*
 build/*
 dyplot.egg-info
+docs/build/*
