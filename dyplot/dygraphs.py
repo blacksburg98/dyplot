@@ -7,7 +7,8 @@ class Dygraphs():
         Pleas see dygaphs.com for dygraphs.py.
     """
     def __init__(self, x, xname):
-        """
+        """ Initialization
+
             :param x: x-axis. index list from pandas.
             :param xname: x-axis name.
         """
@@ -30,13 +31,13 @@ class Dygraphs():
         self.option["axes"]['y']['valueRange'] = []
         self.option["axes"]['y2']['valueRange'] = []
     def plot(self, series, mseries, lseries = None, hseries = None, **kwargs):
-        """ plot the series.
+        """ Plot the series.
                 :param series: Series name
                 :param mseries: The main series. A pandas series.
                 :param lseries: The low series. 
-                    If specified, dygraphs will shade the space between the main series and the low series.
+                 If specified, dygraphs will shade the space between the main series and the low series.
                 :param hseries: The high series. 
-                    If specified, dygraphs will shade the space between the main series and the high series.
+                 If specified, dygraphs will shade the space between the main series and the high series.
             The rest of series option can be set if needed.
         """
         if series not in self.option["series"]:
@@ -55,10 +56,10 @@ class Dygraphs():
     def candleplot(self, open, close, high, low, **kwargs):
         """ Candle sticks plot function for stock analysis.
             All four arguments, open, close, high and low, are mandatory.
-            :param open: open price 
-            :param close: close price 
-            :param high: high price 
-            :param low: low price 
+                :param open: open price 
+                :param close: close price 
+                :param high: high price 
+                :param low: low price 
         """
         if self.candle == True:
             print("Overwrite the previous candle plot.")
@@ -77,10 +78,11 @@ class Dygraphs():
                 self.option["series"]["close"][key] = value
     def annotate(self, series, x, shortText, text=""):
         """ To annotate a particular point in the plot.
-        :param series: series name
-        :param x: The x coordinate for the annotation.
-        :param shortText: Short Text to display on the plot.
-        :param text: The text shown when the mouse is on top of the short text.
+            
+                :param series: series name
+                :param x: The x coordinate for the annotation.
+                :param shortText: Short Text to display on the plot.
+                :param text: The text shown when the mouse is on top of the short text.
         """
         a = {}
         a["series"] = series
@@ -90,9 +92,10 @@ class Dygraphs():
         self.annotations.append(a)
     def set_axis_options(self, axis, **kwargs):
         """ To set the option of axis.
-        :param axis: "x", "y" or "y2"
-        Please find the options on dygraphs.com_
-        : _dygraphs.com http://dygraphs.com/options.html#Axis%20display
+
+                :param axis: "x", "y" or "y2"
+                Please find the options on dygraphs.com_
+                : _dygraphs.com http://dygraphs.com/options.html#Axis%20display
         """
         if kwargs is not None:
             for key, value in kwargs.items():

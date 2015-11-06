@@ -11,7 +11,7 @@ dyplot Package
     :show-inheritance:
 
 :mod:`dygrpahs` Module
------------------
+-------------------------
 
 .. automodule:: dyplot.dygraphs
     :members:

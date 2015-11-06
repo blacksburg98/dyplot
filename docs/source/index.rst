@@ -5,7 +5,7 @@
 
 Welcome to dyplot's documentation!
 ==================================
-.. include:: ../README.md
+.. include:: ../../README.rst
 
 Contents:
 
