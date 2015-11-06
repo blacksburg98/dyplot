@@ -5,13 +5,14 @@
 
 Welcome to dyplot's documentation!
 ==================================
+.. include:: ../README.md
 
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
 
-
+   dyplot
 
 Indices and tables
 ==================

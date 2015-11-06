@@ -76,6 +76,12 @@ class Dygraphs():
                 self.option["series"]["low"][key] = value
                 self.option["series"]["close"][key] = value
     def annotate(self, series, x, shortText, text=""):
+        """ To annotate a particular point in the plot.
+        :param series: series name
+        :param x: The x coordinate for the annotation.
+        :param shortText: Short Text to display on the plot.
+        :param text: The text shown when the mouse is on top of the short text.
+        """
         a = {}
         a["series"] = series
         a["shortText"] = shortText
@@ -83,6 +89,11 @@ class Dygraphs():
         a["text"] = text
         self.annotations.append(a)
     def set_axis_options(self, axis, **kwargs):
+        """ To set the option of axis.
+        :param axis: "x", "y" or "y2"
+        Please find the options on dygraphs.com_
+        : _dygraphs.com http://dygraphs.com/options.html#Axis%20display
+        """
         if kwargs is not None:
             for key, value in kwargs.items():
                 self.option['axes'][axis][key] = value
