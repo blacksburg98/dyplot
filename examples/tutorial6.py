@@ -1,4 +1,4 @@
-from dyplot.c3.bar import Bar
+from dyplot.bar import Bar
 h = [30, 20, 50, 40]
 label = "setosa"
 g = Bar(height=h, label=label)
