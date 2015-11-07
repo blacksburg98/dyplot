@@ -10,7 +10,6 @@ setup(
     url='https://github.com/blacksburg98/dyplot',
     license='LICENSE.txt',
     description='matplotlib-like plot functions for dygraphs.js and c3.js.',
-    long_description = open(__readme__).read(),
     install_requires=[
         "pandas >= 0.7.3",
     ],
