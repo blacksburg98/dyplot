@@ -8,7 +8,7 @@ Subpackages
 
     dyplot.c3
 
-Submodules
+Modules
 ----------
 
 dyplot.dygraphs module
@@ -20,10 +20,3 @@ dyplot.dygraphs module
     :show-inheritance:
 
 
-Module contents
----------------
-
-.. automodule:: dyplot
-    :members:
-    :undoc-members:
-    :show-inheritance:
