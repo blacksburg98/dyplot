@@ -1,8 +1,6 @@
 import os
 from setuptools import setup, find_packages
 
-__currdir__ = os.getcwd()
-__readme__ = os.path.join(__currdir__, 'README.txt')
 setup(
     name='dyplot',
     version='0.7.11',
