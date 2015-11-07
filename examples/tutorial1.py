@@ -10,5 +10,6 @@ dg.plot(series="a", mseries=a)
 dg.plot(series="b", mseries=b)
 dg.plot(series="c", mseries=c,lseries=lc, hseries=hc)
 dg.set_options(title="Test")
+dg.set_axis_options(axis="x",axisLabelColor="red")
 div = dg.savefig(csv_file="tutorial1.csv", html_file="tutorial1.html")
 

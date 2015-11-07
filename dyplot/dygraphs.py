@@ -2,7 +2,15 @@ import pandas
 import csv
 import json
 class Dygraphs():
+    """ matplotlib-like plot functions for dygraphs.js and c3.js.
+        Dygraph.py makes it easier to integrate dygraphs.js into webpage.
+        Pleas see dygaphs.com for detail.
+    """
     def __init__(self, x, xname):
+        """ Initialization
+            :param x: x-axis. index list from pandas.
+            :param xname: x-axis name.
+        """
         self.x = x
         self.xname = xname
         self.series = {}
@@ -22,6 +30,16 @@ class Dygraphs():
         self.option["axes"]['y']['valueRange'] = []
         self.option["axes"]['y2']['valueRange'] = []
     def plot(self, series, mseries, lseries = None, hseries = None, **kwargs):
+        """ 
+            the function to plot the series.
+            If lseries is specified, dygraphs will shade the space between the main series and the low series.
+            If hseries is specified, dygraphs will shade the space between the main series and the high series.
+
+            :param series: Series name
+            :param mseries: the main series. A pandas series.
+            :param lseries: the low series. 
+            :param hseries: the high series. 
+        """
         if series not in self.option["series"]:
             self.option["series"][series] = {}
         self.option["series"][series]["axis"] = 'y'
@@ -36,9 +54,14 @@ class Dygraphs():
             self.series[series]['m'] = mseries 
             self.series[series]['h'] = hseries 
     def candleplot(self, open, close, high, low, **kwargs):
-        """
-        Candle sticks plot function for stock analysis.
-        All four arguments, open, close, high and low, are mandatory.
+
+        """ Candle sticks plot function for stock analysis.
+                All four arguments, open, close, high and low, are mandatory.
+
+                :param open: open price series
+                :param close: close price series
+                :param high: high price series
+                :param low: low price series
         """
         if self.candle == True:
             print("Overwrite the previous candle plot.")
@@ -56,12 +79,13 @@ class Dygraphs():
                 self.option["series"]["low"][key] = value
                 self.option["series"]["close"][key] = value
     def annotate(self, series, x, shortText, text=""):
-        """ To annotate a particular point in the plot.
+        """ 
+            To annotate a particular point in the plot.
 
-        :param series: series name
-        :param x: The x coordinate for the annotation.
-        :param shortText: Short Text to display on the plot.
-        :param text: The text shown when the mouse is on top of the short text.
+            :param series: series name
+            :param x: the x coordinate for the annotation.
+            :param shortText: Short Text to display on the plot.
+            :param text: the text shown when the mouse is on top of the short text.
         """
         a = {}
         a["series"] = series
@@ -70,24 +94,41 @@ class Dygraphs():
         a["text"] = text
         self.annotations.append(a)
     def set_axis_options(self, axis, **kwargs):
-        """ To set the option of axis.
+        """ 
+            To set the option of an axis.
+            Please find the options on `dygraphs.com
+            <http://dygraphs.com/options.html#Axis%20display>`_.
+            For example, to set the label of x axis of g to red:
 
-        :param axis: "x", "y" or "y2"
-        Please find the options on dygraphs.com_
-        : _dygraphs.com http://dygraphs.com/options.html#Axis%20display
+            g.set_axis_options(axis="x",axisLabelColor="red")
+
+            :param axis: "x", "y" or "y2"
         """
         if kwargs is not None:
             for key, value in kwargs.items():
                 self.option['axes'][axis][key] = value
     def set_series_options(self, series, **kwargs):
+        """ 
+            To set the option of a series.
+            Please find the options on `dygraphs.com
+            <http://dygraphs.com/options.html#Series>`_.
+
+            :param series: series name
+        """
         if kwargs is not None:
             for key, value in kwargs.items():
                 self.option['series'][series][key] = value
     def set_options(self, **kwargs):
+        """ To set global option.
+        """
         if kwargs is not None:
             for key, value in kwargs.items():
                 self.option[key] = value
     def auto_range(self, axis="y"):
+        """ To automatically adjust vertical range
+
+                :param axis: "y" or "y2"
+        """
         snames = self.series.keys()
         anames = [x for x in snames if self.option["series"][x]["axis"] == axis] 
         if anames == []:
@@ -120,7 +161,12 @@ class Dygraphs():
         else:
             min_value *= 1.1
         self.option['axes'][axis]['valueRange'] = [min_value, max_value]
-    def save_csv(self, csv_file, dt_fmt):
+    def _save_csv(self, csv_file, dt_fmt):
+        """ To save all necessary data to a csv file.
+
+            :param csv_file: csv file name
+            :param dt_fmt: date time format if x-axis is date-time
+        """
         csv_series = []
         if type(self.x[0]) == pandas.tslib.Timestamp:
             csv_series.append([])
@@ -159,7 +205,19 @@ class Dygraphs():
                 cw.writerow(line)
     def savefig(self, csv_file="dyplot.csv", div_id="dyplot", js_vid="g", dt_fmt="%Y-%m-%d", \
         html_file=None, width="1024px", height="600px", url_path=""):
-        self.save_csv(csv_file, dt_fmt)
+        self._save_csv(csv_file, dt_fmt)
+        """ To save the plot to a html file or to return html code.
+            If html_file is specified, a simple html file is saved.
+                :param csv_file: the csv file used by
+                :param div_id: div id to be used in html
+                :param js_vid: id to be used in javascript
+                :param dt_fmt: date-time format if the seriers are time series.
+                :param html_file: the file name of html file
+                :param width: the width of the plot
+                :param height: the height of the plot
+                :param url_path: url path for the browser to get csv file
+                :return div: the html code to be embedded in the webpage is return.
+        """
         if url_path == "":
             url_path = csv_file
         if self.option['axes']['y']['valueRange'] == []:
@@ -182,9 +240,11 @@ class Dygraphs():
         div += '  });\n'
         div += '</script>\n'
         if type(html_file) != type(None):
-            self.save_html(html_file, div)
+            self._save_html(html_file, div)
         return div
-    def save_html(self, html_file, div):
+    def _save_html(self, html_file, div):
+        """ To save the plot to a html file.
+        """
         header = """<html>
 <head>
 <script type="text/javascript" src="/js/dygraph-combined-dev.js"></script>

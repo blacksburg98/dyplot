@@ -7,6 +7,7 @@ Drag your mouse to zoom in and double click to zoom out.
 You can clone the source code from 
 https://github.com/blacksburg98/dyplot
 The series needs to be pandas.Series
+
 Tutorial 1. 
 ===========
 See the output at http://store-demo.appspot.com/tutorial/tutorial1.html 
