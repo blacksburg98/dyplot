@@ -57,6 +57,7 @@ class Dygraphs():
                 self.option["series"]["close"][key] = value
     def annotate(self, series, x, shortText, text=""):
         """ To annotate a particular point in the plot.
+
         :param series: series name
         :param x: The x coordinate for the annotation.
         :param shortText: Short Text to display on the plot.
@@ -70,6 +71,7 @@ class Dygraphs():
         self.annotations.append(a)
     def set_axis_options(self, axis, **kwargs):
         """ To set the option of axis.
+
         :param axis: "x", "y" or "y2"
         Please find the options on dygraphs.com_
         : _dygraphs.com http://dygraphs.com/options.html#Axis%20display

@@ -1,4 +1,3 @@
-
 dyplot Package
 ==================
 
@@ -13,7 +12,7 @@ dyplot Package
 :mod:`dygrpahs` Module
 -----------------
 
-.. automodule:: dyplot.dygraphs
+.. autoclass:: dyplot.dygraphs
     :members:
     :undoc-members:
     :show-inheritance:
