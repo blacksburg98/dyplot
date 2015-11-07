@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # dyplot documentation build configuration file, created by
-# sphinx-quickstart on Fri Nov  6 19:00:32 2015.
+# sphinx-quickstart on Fri Nov  6 22:58:34 2015.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.

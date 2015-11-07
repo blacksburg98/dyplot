@@ -7,16 +7,12 @@ Subpackages
 .. toctree::
 
     dyplot.c3
+    dyplot.dygraphs
 
-Modules
-----------
+Module contents
+---------------
 
-dyplot.dygraphs module
-----------------------
-
-.. automodule:: dyplot.dygraphs
+.. automodule:: dyplot
     :members:
     :undoc-members:
     :show-inheritance:
-
-
