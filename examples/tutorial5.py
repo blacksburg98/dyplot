@@ -1,4 +1,4 @@
-from dyplot.c3.pie import Pie
+from dyplot.pie import Pie
 frac = [30, 20, 50]
 labels = ["setosa", "versicolor", "viginica"]
 g = Pie(frac=frac, labels=labels)

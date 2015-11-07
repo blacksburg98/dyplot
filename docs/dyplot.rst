@@ -1,13 +1,49 @@
 dyplot package
 ==============
 
-Subpackages
------------
+Submodules
+----------
 
-.. toctree::
+dyplot.bar module
+-----------------
 
-    dyplot.c3
-    dyplot.dygraphs
+.. automodule:: dyplot.bar
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+dyplot.core module
+------------------
+
+.. automodule:: dyplot.core
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+dyplot.dygraphs module
+----------------------
+
+.. automodule:: dyplot.dygraphs
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+dyplot.hist module
+------------------
+
+.. automodule:: dyplot.hist
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+dyplot.pie module
+-----------------
+
+.. automodule:: dyplot.pie
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------
