@@ -1,4 +1,4 @@
-from dyplot.c3.bar import Core 
+from dyplot.bar import Core 
 class Bar(Core):
     def __init__(self, height, label):
         Core.__init__(self)

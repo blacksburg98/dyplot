@@ -12,14 +12,28 @@ class Core():
         self.option["data"]["columns"] = []
         self.animation = []
     def dump_option(self):
+        """
+            :return option: return the instance variable option.
+        """
         return self.option
     def animate(self, action, arguments, time):
+        """
+        To use animation on the chart.
+        """
         a = {}
         a["action"] = action
         a["arguments"] = arguments
         a["time"] = time
         self.animation.append(a)
     def savefig(self, div_id="c3general", js_vid="g", html_file=None, width="400px", height="300px"):
+        """
+            To generate the html code to be embedded in html.
+            :param div_id: The div id for html code
+            :param js_vid: The javascript c3 object.
+            :param html_file: Save the html code to a html file if specified.
+            :param width: The width of the chart.
+            :param height: The height of the chart.
+        """
         self.option["bindto"] = '#' + div_id 
         self.option["onmouseover"] = 'function (d, i) { console.log(\'onmouseover\', d, i, this); }'
         self.option["onmouseout"] = 'function (d, i) { console.log(\'onmouseout\', d, i, this); }'
@@ -35,12 +49,12 @@ class Core():
             div += '},' + str(a["time"]) + ');\n' 
         div += '</script>\n'
         if type(html_file) != type(None):
-            self.save_html(html_file, div)
+            self._save_html(html_file, div)
         return div
-    def save_html(self, html_file, div):
+    def _save_html(self, html_file, div):
         header = """<html>
 <head>
-<link rel="stylesheet" type="text/css" href="/stylesheets/c3.css">
+<link rel="stylesheet" type="text/css" href="/stylesheets/c3.min.css">
 <script type="text/javascript" src="/js/d3.min.js"></script>
 <script type="text/javascript" src="/js/c3.min.js"></script>
 </head><body>

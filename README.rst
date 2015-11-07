@@ -112,7 +112,7 @@ Tutorial 5.
 See the output at http://store-demo.appspot.com/tutorial/tutorial5.html 
 ::
 
-    from dyplot.c3.pie import Pie
+    from dyplot.pie import Pie
     frac = [30, 20, 50]
     labels = ["setosa", "versicolor", "viginica"]
     g = Pie(frac=frac, labels=labels)
@@ -126,7 +126,7 @@ Tutorial 6.
 See the output at http://store-demo.appspot.com/tutorial/tutorial6.html 
 ::
 
-    from dyplot.c3.bar import Bar
+    from dyplot.bar import Bar
     h = [30, 20, 50, 40]
     label = "setosa"
     g = Bar(height=h, label=label)
