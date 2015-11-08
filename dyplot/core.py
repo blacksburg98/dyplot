@@ -28,6 +28,7 @@ class Core():
     def savefig(self, div_id="c3general", js_vid="g", html_file=None, width="400px", height="300px"):
         """
             To generate the html code to be embedded in html.
+
             :param div_id: The div id for html code
             :param js_vid: The javascript c3 object.
             :param html_file: Save the html code to a html file if specified.

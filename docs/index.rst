@@ -5,7 +5,6 @@
 
 Welcome to dyplot's documentation!
 ==================================
-.. include:: ../README.rst
 
 Contents:
 
@@ -14,6 +13,7 @@ Contents:
 
    dyplot
 
+.. include:: ../README.rst
 
 Indices and tables
 ==================
