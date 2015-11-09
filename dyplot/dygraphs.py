@@ -8,6 +8,7 @@ class Dygraphs():
     """
     def __init__(self, x, xname):
         """ Initialization
+
             :param x: x-axis. index list from pandas.
             :param xname: x-axis name.
         """

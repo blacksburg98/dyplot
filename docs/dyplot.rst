@@ -10,6 +10,7 @@ dyplot.bar module
 .. automodule:: dyplot.bar
     :members:
     :undoc-members:
+    :special-members:
     :show-inheritance:
 
 dyplot.core module
@@ -26,6 +27,7 @@ dyplot.dygraphs module
 .. automodule:: dyplot.dygraphs
     :members:
     :undoc-members:
+    :special-members:
     :show-inheritance:
 
 dyplot.hist module
@@ -42,6 +44,7 @@ dyplot.pie module
 .. automodule:: dyplot.pie
     :members:
     :undoc-members:
+    :special-members:
     :show-inheritance:
 
 
