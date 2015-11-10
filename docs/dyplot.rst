@@ -36,6 +36,7 @@ dyplot.hist module
 .. automodule:: dyplot.hist
     :members:
     :undoc-members:
+    :special-members:
     :show-inheritance:
 
 dyplot.pie module

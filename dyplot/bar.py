@@ -2,10 +2,12 @@ from dyplot.core import Core
 class Bar(Core):
     def __init__(self, height, label):
         """ 
-        To plot a bar chart.
+            To plot a bar chart.
 
-        :param height: the list to plot.
-        :param label: A axis label.
+            :param height: The data to plot. A list of data.
+            :type height: array_like
+            :param label: The name of the data.
+            :type label: string 
         """
         Core.__init__(self)
         self.option["data"]["type"] = "bar"

@@ -30,10 +30,15 @@ class Core():
             To generate the html code to be embedded in html.
 
             :param div_id: The div id for html code
+            :type div_id: string
             :param js_vid: The javascript c3 object.
+            :type js_vid: string
             :param html_file: Save the html code to a html file if specified.
+            :type html_file: string
             :param width: The width of the chart.
+            :type width: int
             :param height: The height of the chart.
+            :type height: int
         """
         self.option["bindto"] = '#' + div_id 
         self.option["onmouseover"] = 'function (d, i) { console.log(\'onmouseover\', d, i, this); }'
@@ -66,5 +71,13 @@ class Core():
             f.write(div)
             f.write(footer)
     def set_xticklabels(self, labels, t=""):
+        """
+            To set the labels of x axis.
+
+            :param labels: A list of t. 
+            :type labels: array_like 
+            :param t: "timeseries", "categories" or "indexed"
+        """
         self.option["axis"]["x"]["type"] = t
-        self.option["axis"]["x"]["categories"] = labels
+        if t == "categories":
+            self.option["axis"]["x"]["categories"] = labels

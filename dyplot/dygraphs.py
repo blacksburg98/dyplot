@@ -9,8 +9,10 @@ class Dygraphs():
     def __init__(self, x, xname):
         """ Initialization
 
-            :param x: x-axis. index list from pandas.
+            :param x: x-axis. 
+            :type x: index list from pandas.
             :param xname: x-axis name.
+            :type xname: string
         """
         self.x = x
         self.xname = xname
@@ -37,9 +39,13 @@ class Dygraphs():
             If hseries is specified, dygraphs will shade the space between the main series and the high series.
 
             :param series: Series name
-            :param mseries: the main series. A pandas series.
-            :param lseries: the low series. 
-            :param hseries: the high series. 
+            :type series: string
+            :param mseries: The main series. 
+            :type mseries: pandas series.
+            :param lseries: The low series. 
+            :type lseries: pandas series.
+            :param hseries: The high series. 
+            :type hseries: pandas series.
         """
         if series not in self.option["series"]:
             self.option["series"][series] = {}
@@ -60,9 +66,13 @@ class Dygraphs():
                 All four arguments, open, close, high and low, are mandatory.
 
                 :param open: open price series
+                :type open: pandas series
                 :param close: close price series
+                :type close: pandas series
                 :param high: high price series
+                :type high: pandas series
                 :param low: low price series
+                :type low: pandas series
         """
         if self.candle == True:
             print("Overwrite the previous candle plot.")
@@ -99,11 +109,13 @@ class Dygraphs():
             To set the option of an axis.
             Please find the options on `dygraphs.com
             <http://dygraphs.com/options.html#Axis%20display>`_.
-            For example, to set the label of x axis of g to red:
-
-            g.set_axis_options(axis="x",axisLabelColor="red")
 
             :param axis: "x", "y" or "y2"
+            :type axis: string
+
+            For example, to set the label of x axis of g to red.
+            ::
+                g.set_axis_options(axis="x",axisLabelColor="red")
         """
         if kwargs is not None:
             for key, value in kwargs.items():
@@ -115,6 +127,7 @@ class Dygraphs():
             <http://dygraphs.com/options.html#Series>`_.
 
             :param series: series name
+            :type series: string
         """
         if kwargs is not None:
             for key, value in kwargs.items():
@@ -129,6 +142,7 @@ class Dygraphs():
         """ To automatically adjust vertical range
 
                 :param axis: "y" or "y2"
+                :type axis: string
         """
         snames = self.series.keys()
         anames = [x for x in snames if self.option["series"][x]["axis"] == axis] 
@@ -162,11 +176,75 @@ class Dygraphs():
         else:
             min_value *= 1.1
         self.option['axes'][axis]['valueRange'] = [min_value, max_value]
-    def _save_csv(self, csv_file, dt_fmt):
-        """ To save all necessary data to a csv file.
+    def savefig(self, csv_file="dyplot.csv", div_id="dyplot", js_vid="g", dt_fmt="%Y-%m-%d", \
+        html_file=None, width="1024px", height="600px", csv_url=""):
+        """ To save the plot to a html file or to return html code.
+
+                :param csv_file: the csv file name
+                :type csv_file: string
+                :param csv_url: the csv url used by javascript
+                :type csv_url: string
+                :param div_id: div id to be used in html
+                :type div_id: string
+                :param js_vid: id to be used in javascript
+                :type js_vid: string
+                :param dt_fmt: date-time format if the seriers are time series.
+                :type dt_fmt: string
+                :param html_file: the file name of html file
+                :type html_file: string
+                :param width: The width of the plot
+                :type width: int
+                :param height: The height of the plot
+                :type height: int
+                :return div: the html code to be embedded in the webpage is return.
+        """
+        self.save_csv(csv_file, dt_fmt)
+        if csv_url == "":
+            csv_url = csv_file
+        if self.option['axes']['y']['valueRange'] == []:
+            self.auto_range(axis='y')
+        if self.option['axes']['y2']['valueRange'] == []:
+            self.auto_range(axis='y2')
+        options = json.dumps(self.option)
+        options = options.replace('"candlePlotter"', 'candlePlotter')
+        div = '<div id="' + div_id + '" style="width:'+ width + '; height:' + height + ';"></div>\n'
+        div += '<script type="text/javascript">\n'
+        div += js_vid + ' = new Dygraph(\n'
+        div += '    document.getElementById("' + div_id + '"),\n'
+        div += '    "' + csv_url + '", // path to CSV file\n'
+        div += options
+        div += '  );\n'
+        div += '  ' + js_vid + '.ready(function() {\n'
+        div += '    ' + js_vid + '.setAnnotations('
+        div += json.dumps(self.annotations)
+        div += '    );\n'
+        div += '  });\n'
+        div += '</script>\n'
+        if type(html_file) != type(None):
+            self.save_html(html_file, div)
+        return div
+    def save_html(self, html_file, div):
+        """ To save the plot to a html file.
+        """
+        header = """<html>
+<head>
+<script type="text/javascript" src="/js/dygraph-combined-dev.js"></script>
+<script type="text/javascript" src="/js/dyplot.js"></script>
+</head><body>
+"""
+        footer = "</body></html>"
+        with open(html_file, 'w') as f:
+            f.write(header)
+            f.write(div)
+            f.write(footer)
+    def save_csv(self, csv_file, dt_fmt):
+        """ 
+            To save all necessary data to a csv file.
 
             :param csv_file: csv file name
+            :type csv_file: string
             :param dt_fmt: date time format if x-axis is date-time
+            :type dt_fmt: string
         """
         csv_series = []
         if type(self.x[0]) == pandas.tslib.Timestamp:
@@ -204,57 +282,3 @@ class Dygraphs():
             cw = csv.writer(fp, lineterminator='\n', delimiter=',', quoting = csv.QUOTE_NONE)
             for line in lines:
                 cw.writerow(line)
-    def savefig(self, csv_file="dyplot.csv", div_id="dyplot", js_vid="g", dt_fmt="%Y-%m-%d", \
-        html_file=None, width="1024px", height="600px", url_path=""):
-        self._save_csv(csv_file, dt_fmt)
-        """ To save the plot to a html file or to return html code.
-            If html_file is specified, a simple html file is saved.
-                :param csv_file: the csv file used by
-                :param div_id: div id to be used in html
-                :param js_vid: id to be used in javascript
-                :param dt_fmt: date-time format if the seriers are time series.
-                :param html_file: the file name of html file
-                :param width: the width of the plot
-                :param height: the height of the plot
-                :param url_path: url path for the browser to get csv file
-                :return div: the html code to be embedded in the webpage is return.
-        """
-        if url_path == "":
-            url_path = csv_file
-        if self.option['axes']['y']['valueRange'] == []:
-            self.auto_range(axis='y')
-        if self.option['axes']['y2']['valueRange'] == []:
-            self.auto_range(axis='y2')
-        options = json.dumps(self.option)
-        options = options.replace('"candlePlotter"', 'candlePlotter')
-        div = '<div id="' + div_id + '" style="width:'+ width + '; height:' + height + ';"></div>\n'
-        div += '<script type="text/javascript">\n'
-        div += js_vid + ' = new Dygraph(\n'
-        div += '    document.getElementById("' + div_id + '"),\n'
-        div += '    "' + url_path + '", // path to CSV file\n'
-        div += options
-        div += '  );\n'
-        div += '  ' + js_vid + '.ready(function() {\n'
-        div += '    ' + js_vid + '.setAnnotations('
-        div += json.dumps(self.annotations)
-        div += '    );\n'
-        div += '  });\n'
-        div += '</script>\n'
-        if type(html_file) != type(None):
-            self._save_html(html_file, div)
-        return div
-    def _save_html(self, html_file, div):
-        """ To save the plot to a html file.
-        """
-        header = """<html>
-<head>
-<script type="text/javascript" src="/js/dygraph-combined-dev.js"></script>
-<script type="text/javascript" src="/js/dyplot.js"></script>
-</head><body>
-"""
-        footer = "</body></html>"
-        with open(html_file, 'w') as f:
-            f.write(header)
-            f.write(div)
-            f.write(footer)
-
