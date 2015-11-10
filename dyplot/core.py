@@ -44,7 +44,7 @@ class Core():
         self.option["onmouseover"] = 'function (d, i) { console.log(\'onmouseover\', d, i, this); }'
         self.option["onmouseout"] = 'function (d, i) { console.log(\'onmouseout\', d, i, this); }'
         self.option["onclick"] = 'function (d, i) { console.log(\'onclick\', d, i, this); }'
-        div = '<div id="' + div_id + '" style="width:'+ width + '; height:' + height + ';"></div>\n'
+        div = '<div id="' + div_id + '" style="width:'+ str(width) + '; height:' + str(height) + ';"></div>\n'
         div += '<script>\n'
         div += js_vid + ' = c3.generate(\n'
         div += json.dumps(self.option)

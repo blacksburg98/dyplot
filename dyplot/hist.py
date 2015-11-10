@@ -4,7 +4,7 @@ class Hist(Core):
     """
     Compute the histogram of a set of data.
     """
-    def __init__(self, a, bins=10, r=None, weights=None, density=None):
+    def __init__(self, a, bins=10, r=None, weights=None, density=None, xlabel = "", **kwargs):
         """
 
             :param a: input data. The histogram is computed over the flattened array.
@@ -21,13 +21,15 @@ class Hist(Core):
                 If True, the result is the value of the probability density function at the bin, normalized such that the integral over the range is 1. Note that the sum of the histogram values will not be equal to 1 unless bins of unity width are chosen; it is not a probability mass function. 
                 Overrides the normed keyword if given.
             :type density: bool, optional
+            :param xlabel: The name of the x label.
+            :type xlabel: string
         """
-        Core.__init__(self)
+        Core.__init__(self, option=kwargs)
         hist, bin_edges  = np.histogram(a, bins, r, weights, density)
         h = map(int, hist)
         self.option["data"]["type"] = "bar"
         columns = []
-        columns.append("Freq")
+        columns.append(xlabel)
         columns.extend(h)
         self.option["data"]["columns"].append(columns)
         self.option["bar"] = {}
