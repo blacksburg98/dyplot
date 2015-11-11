@@ -6,14 +6,14 @@
 Welcome to dyplot's documentation!
 ==================================
 
-Contents:
+.. contents::
 
 .. toctree::
    :maxdepth: 4
 
+   motivation
+   introduction
    dyplot
-
-.. include:: ../README.rst
 
 Indices and tables
 ==================
