@@ -33,18 +33,18 @@ class Core():
             :type div_id: string
             :param js_vid: The javascript c3 object.
             :type js_vid: string
-            :param html_file: Save the html code to a html file if specified.
+            :param html_file: Save the html code to a html file if specified. "400px" or "50%".
             :type html_file: string
-            :param width: The width of the chart.
-            :type width: int
-            :param height: The height of the chart.
-            :type height: int
+            :param width: The width of the chart. The format is the same as html width. 
+            :type width: string
+            :param height: The height of the chart. The format is the same as html height. 
+            :type height: string
         """
         self.option["bindto"] = '#' + div_id 
         self.option["onmouseover"] = 'function (d, i) { console.log(\'onmouseover\', d, i, this); }'
         self.option["onmouseout"] = 'function (d, i) { console.log(\'onmouseout\', d, i, this); }'
         self.option["onclick"] = 'function (d, i) { console.log(\'onclick\', d, i, this); }'
-        div = '<div id="' + div_id + '" style="width:'+ str(width) + '; height:' + str(height) + ';"></div>\n'
+        div = '<div id="' + div_id + '" style="width:'+ width + '; height:' + height + ';"></div>\n'
         div += '<script>\n'
         div += js_vid + ' = c3.generate(\n'
         div += json.dumps(self.option)
