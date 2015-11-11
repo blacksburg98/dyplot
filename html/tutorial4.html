@@ -1,0 +1,16 @@
+<html>
+<head>
+<script type="text/javascript" src="/js/dygraph-combined-dev.js"></script>
+<script type="text/javascript" src="/js/dyplot.js"></script>
+</head><body>
+<div id="dyplot" style="width:1024px; height:600px;"></div>
+<script type="text/javascript">
+g = new Dygraph(
+    document.getElementById("dyplot"),
+    "tutorial4.csv", // path to CSV file
+{"customBars": true, "ylabel": "Russel 3000", "series": {"Russel 3000": {"axis": "y"}, "AAPL": {"axis": "y2"}}, "legend": "always", "title": "Tutorial 4", "showRoller": false, "y2label": "AAPL", "axes": {"x": {}, "y": {"valueRange": [566.1003122388349, 1060.3846774398057]}, "y2": {"valueRange": [24.586, 46.053000000000004]}}}  );
+  g.ready(function() {
+    g.setAnnotations([{"text": "Buy on 2010-06-21", "series": "AAPL", "x": "2010-06-21", "shortText": "B"}, {"text": "Sell on 2010-08-13", "series": "AAPL", "x": "2010-08-13", "shortText": "S"}]    );
+  });
+</script>
+</body></html>

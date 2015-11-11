@@ -1,0 +1,14 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/stylesheets/c3.min.css">
+<script type="text/javascript" src="/js/d3.min.js"></script>
+<script type="text/javascript" src="/js/c3.min.js"></script>
+</head><body>
+<div id="c3general" style="width:400px; height:300px;"></div>
+<script>
+g = c3.generate(
+{"onmouseout": "function (d, i) { console.log('onmouseout', d, i, this); }", "axis": {"x": {}, "y": {}}, "data": {"columns": [["setosa", 30], ["versicolor", 20], ["viginica", 50]], "type": "pie"}, "onmouseover": "function (d, i) { console.log('onmouseover', d, i, this); }", "onclick": "function (d, i) { console.log('onclick', d, i, this); }", "bindto": "#c3general"}  );
+setTimeout(function () {g.load({"columns": [["setosa", 100]]});
+},1000);
+</script>
+</body></html>

@@ -1,0 +1,16 @@
+<html>
+<head>
+<script type="text/javascript" src="/js/dygraph-combined-dev.js"></script>
+<script type="text/javascript" src="/js/dyplot.js"></script>
+</head><body>
+<div id="dyplot" style="width:1024px; height:600px;"></div>
+<script type="text/javascript">
+g = new Dygraph(
+    document.getElementById("dyplot"),
+    "tutorial8.csv", // path to CSV file
+{"ylabel": "Y Values", "series": {"10D MA": {"axis": "y"}}, "showRoller": false, "title": "Tutorial 8", "plotter": candlePlotter, "axes": {"y": {"valueRange": [88.30665, 126.73485000000001]}, "x": {}, "y2": {"valueRange": []}}, "legend": "always", "customBars": false}  );
+  g.ready(function() {
+    g.setAnnotations([]    );
+  });
+</script>
+</body></html>

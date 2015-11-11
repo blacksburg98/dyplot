@@ -1,0 +1,16 @@
+<html>
+<head>
+<script type="text/javascript" src="/js/dygraph-combined-dev.js"></script>
+<script type="text/javascript" src="/js/dyplot.js"></script>
+</head><body>
+<div id="dyplot" style="width:1024px; height:600px;"></div>
+<script type="text/javascript">
+g = new Dygraph(
+    document.getElementById("dyplot"),
+    "tutorial2.csv", // path to CSV file
+{"showRoller": false, "series": {"AAPL": {"axis": "y"}, "MSFT": {"axis": "y"}, "WMT": {"axis": "y"}, "XOM": {"axis": "y"}}, "title": "Tutorial 2", "axes": {"y2": {"valueRange": []}, "y": {"valueRange": [0.675501113585746, 1.6728848821081832]}, "x": {}}, "customBars": true, "legend": "always", "ylabel": "Y Values"}  );
+  g.ready(function() {
+    g.setAnnotations([]    );
+  });
+</script>
+</body></html>

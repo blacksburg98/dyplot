@@ -1,0 +1,16 @@
+<html>
+<head>
+<script type="text/javascript" src="/js/dygraph-combined-dev.js"></script>
+<script type="text/javascript" src="/js/dyplot.js"></script>
+</head><body>
+<div id="dyplot" style="width:1024px; height:600px;"></div>
+<script type="text/javascript">
+g = new Dygraph(
+    document.getElementById("dyplot"),
+    "tutorial1.csv", // path to CSV file
+{"ylabel": "Y Values", "axes": {"x": {"axisLabelColor": "red"}, "y": {"valueRange": [0.9, 16.5]}, "y2": {"valueRange": []}}, "title": "Test", "legend": "always", "customBars": true, "showRoller": false, "series": {"a": {"axis": "y"}, "b": {"axis": "y"}, "c": {"axis": "y"}}}  );
+  g.ready(function() {
+    g.setAnnotations([]    );
+  });
+</script>
+</body></html>
