@@ -60,9 +60,9 @@ class Core():
     def _save_html(self, html_file, div):
         header = """<html>
 <head>
-<link rel="stylesheet" type="text/css" href="/stylesheets/c3.min.css">
-<script type="text/javascript" src="/js/d3.min.js"></script>
-<script type="text/javascript" src="/js/c3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../stylesheets/c3.min.css">
+<script type="text/javascript" src="../js/d3.min.js"></script>
+<script type="text/javascript" src="../js/c3.min.js"></script>
 </head><body>
 """
         footer = "</body></html>"
