@@ -53,3 +53,4 @@ The content of div is:
       });
     </script>
 
+You can see the `output <http://blacksburg98.github.io/dyplot/html/tutorial0.html>`_. 

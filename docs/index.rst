@@ -13,6 +13,7 @@ Welcome to dyplot's documentation!
 
    motivation
    introduction
+   tutorials
    dyplot
 
 Indices and tables
