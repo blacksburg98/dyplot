@@ -1,12 +1,12 @@
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="../stylesheets/c3.min.css">
-<script type="text/javascript" src="../js/d3.min.js"></script>
-<script type="text/javascript" src="../js/c3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/stylesheets/c3.min.css">
+<script type="text/javascript" src="/js/d3.min.js"></script>
+<script type="text/javascript" src="/js/c3.min.js"></script>
 </head><body>
 <div id="c3general" style="width:400px; height:300px;"></div>
 <script>
 g = c3.generate(
-{"data": {"columns": [["Frequency", 2, 4, 5, 0, 4, 5, 0, 1, 1, 2]], "type": "bar"}, "axis": {"y": {}, "x": {"type": "categories", "categories": ["2.0-2.7", "2.7-3.4", "3.4-4.1", "4.1-4.8", "4.8-5.5", "5.5-6.2", "6.2-6.9", "6.9-7.6", "7.6-8.3", "8.3-9.0"]}}, "bindto": "#c3general", "onmouseover": "function (d, i) { console.log('onmouseover', d, i, this); }", "onclick": "function (d, i) { console.log('onclick', d, i, this); }", "onmouseout": "function (d, i) { console.log('onmouseout', d, i, this); }", "bar": {"width": {"ratio": 0.5}}}  );
+{"bar": {"width": {"ratio": 0.5}}, "onclick": "function (d, i) { console.log('onclick', d, i, this); }", "bindto": "#c3general", "data": {"columns": [["Frequency", 2, 4, 5, 0, 4, 5, 0, 1, 1, 2]], "type": "bar"}, "axis": {"x": {"categories": ["2.0-2.7", "2.7-3.4", "3.4-4.1", "4.1-4.8", "4.8-5.5", "5.5-6.2", "6.2-6.9", "6.9-7.6", "7.6-8.3", "8.3-9.0"], "type": "categories"}, "y": {}}, "onmouseout": "function (d, i) { console.log('onmouseout', d, i, this); }", "onmouseover": "function (d, i) { console.log('onmouseover', d, i, this); }"}  );
 </script>
 </body></html>

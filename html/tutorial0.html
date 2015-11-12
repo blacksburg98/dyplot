@@ -1,0 +1,16 @@
+<html>
+<head>
+<script type="text/javascript" src="/js/dygraph-combined-dev.js"></script>
+<script type="text/javascript" src="/js/dyplot.js"></script>
+</head><body>
+<div id="demodiv" style="width:1024px; height:600px;"></div>
+<script type="text/javascript">
+jid = new Dygraph(
+    document.getElementById("demodiv"),
+    "tutorial0.csv", // path to CSV file
+{"axes": {"x": {}, "y2": {"valueRange": []}, "y": {"valueRange": [0.016570714232368288, 1.0885594806366807]}}, "title": "Tutorial 0", "ylabel": "Y Values", "showRoller": false, "series": {"Random": {"axis": "y"}}, "legend": "always", "customBars": true}  );
+  jid.ready(function() {
+    jid.setAnnotations([]    );
+  });
+</script>
+</body></html>
