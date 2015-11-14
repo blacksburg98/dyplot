@@ -4,3 +4,5 @@ dist/*
 build/*
 dyplot.egg-info
 docs/_build/*
+examples/*.html
+examples/*.csv

@@ -16,12 +16,12 @@ class Scatter(NVD3):
                 :param s: The sizes of each data point. 
                 :type s: int or a list of int
                 :param marker: 
-                    1. 'o' : circle
-                    2. '+' : cross 
-                    3. '^' : triangle-up 
-                    4. 'v' : triangle-down
-                    5. 'D' : diamond 
-                    6. 's' : square
+                    * 'o' : circle
+                    * '+' : cross 
+                    * '^' : triangle-up 
+                    * 'v' : triangle-down
+                    * 'D' : diamond 
+                    * 's' : square
                 :type marker: string or a list of string
                 :param g: The group name.
                 :type g: string
