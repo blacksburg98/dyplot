@@ -4,10 +4,10 @@ dyplot package
 Submodules
 ----------
 
-dyplot.bar module
------------------
+dyplot.dygraphs module
+----------------------
 
-.. automodule:: dyplot.bar
+.. automodule:: dyplot.dygraphs
     :members:
     :undoc-members:
     :special-members:
@@ -21,10 +21,10 @@ dyplot.core module
     :undoc-members:
     :show-inheritance:
 
-dyplot.dygraphs module
-----------------------
+dyplot.bar module
+-----------------
 
-.. automodule:: dyplot.dygraphs
+.. automodule:: dyplot.bar
     :members:
     :undoc-members:
     :special-members:
@@ -43,6 +43,15 @@ dyplot.pie module
 -----------------
 
 .. automodule:: dyplot.pie
+    :members:
+    :undoc-members:
+    :special-members:
+    :show-inheritance:
+
+dyplot.scatter module
+-----------------
+
+.. automodule:: dyplot.scatter
     :members:
     :undoc-members:
     :special-members:
