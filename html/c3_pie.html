@@ -7,7 +7,7 @@
 <div id="c3general" style="width:400px; height:300px;"></div>
 <script>
 g = c3.generate(
-{"onmouseout": "function (d, i) { console.log('onmouseout', d, i, this); }", "axis": {"x": {}, "y": {}}, "data": {"columns": [["setosa", 30], ["versicolor", 20], ["viginica", 50]], "type": "pie"}, "onmouseover": "function (d, i) { console.log('onmouseover', d, i, this); }", "onclick": "function (d, i) { console.log('onclick', d, i, this); }", "bindto": "#c3general"}  );
+{"onmouseout": "function (d, i) { console.log('onmouseout', d, i, this); }", "bindto": "#c3general", "onmouseover": "function (d, i) { console.log('onmouseover', d, i, this); }", "onclick": "function (d, i) { console.log('onclick', d, i, this); }", "data": {"type": "pie", "columns": [["setosa", 30], ["versicolor", 20], ["viginica", 50]]}, "axis": {"y": {}, "x": {}}}  );
 setTimeout(function () {g.load({"columns": [["setosa", 100]]});
 },1000);
 </script>

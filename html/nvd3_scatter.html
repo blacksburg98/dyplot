@@ -1,0 +1,14 @@
+<html>
+<head>
+<link href="../stylesheets/nv.d3.css" rel="stylesheet">
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../js/d3.min.js"></script>
+<script src="../js/nv.d3.js"></script>
+<script src="../js/dyplot.js"></script>
+</head><body>
+<style>
+#nvd3 svg { height:400px; width: 600px;}
+</style><div id="nvd3"><svg></svg></div>
+<script>
+scatter_chart({chart_data:"nvd3_scatter.csv", div :"nvd3", options:{"ytickformat": ".02f", "showDistX": true, "xtickformat": ".02f", "showDistY": true, "onlyCricles": false, "transitionDuration": 350}})</script>
+</body></html>
