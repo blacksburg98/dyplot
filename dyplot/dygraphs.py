@@ -228,8 +228,8 @@ class Dygraphs():
         """
         header = """<html>
 <head>
-<script type="text/javascript" src="/js/dygraph-combined-dev.js"></script>
-<script type="text/javascript" src="/js/dyplot.js"></script>
+<script type="text/javascript" src="../js/dygraph-combined-dev.js"></script>
+<script type="text/javascript" src="../js/dyplot.js"></script>
 </head><body>
 """
         footer = "</body></html>"
@@ -239,7 +239,7 @@ class Dygraphs():
             f.write(footer)
     def save_csv(self, csv_file, dt_fmt):
         """ 
-            To save all necessary data to a csv file.
+        To save all necessary data to a csv file.
 
             :param csv_file: csv file name
             :type csv_file: string

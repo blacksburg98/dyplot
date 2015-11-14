@@ -1,4 +1,4 @@
-from dyplot.core import Core as c3Core
+from dyplot.c3 import C3 as c3Core
 class Pie(c3Core):
     def __init__(self, frac, labels):
         """

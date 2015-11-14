@@ -109,3 +109,79 @@ function change(el) {
   g.setVisibility(parseInt(el.id), el.checked);
   setStatus();
 }
+// Scatter function
+// use nvd3
+function Scatter(chart_data_obj, div, option) {
+    final_option = {
+        showDistX: true,
+        showDistY: true,
+        transitionDuration: 350,
+        xtickformat: '.02f',
+        ytickformat: '.02f',
+        onlyCricles: false
+      };
+    for (var key in option) {
+      final_option[key] = option[key] 
+    }
+    var chart = nv.models.scatterChart()
+                  .showDistX(final_option["showDistX"])    //showDist, when true, will display those little distribution lines on the axis.
+                  .showDistY(final_option["showDistY"])
+                  .transitionDuration(final_option["transitionDuration"])
+                  .color(d3.scale.category10().range());
+    //Configure how the tooltip looks.
+    chart.tooltipContent(function(key) {
+        return '<h3>' + key + '</h3>';
+    });
+    //Axis settings
+    chart.xAxis.tickFormat(d3.format(final_option["xtickformat"]));
+    chart.yAxis.tickFormat(d3.format(final_option["ytickformat"]));
+    //We want to show shapes other than circles.
+    chart.scatter.onlyCircles(final_option["onlyCircles"]);
+    //var myData = randomData(2,40);
+    var myData = chart_data_obj
+    var div_select = "#".concat(div).concat(" svg")
+    d3.select(div_select)
+        .datum(myData)
+        .call(chart);
+    nv.utils.windowResize(chart.update);
+    return chart;
+}
+function scatter_chart(arg) {
+  $.ajax({
+      type: "GET",
+      url: arg["chart_data"],
+      dataType: "text",
+      success: function(data) {
+          var csv_data;
+          var chart_data_obj = [];
+          d = data.replace(/\r\n|\r/gm, "\n");
+          csv_data = d.split("\n");
+          csv_data.pop();
+          var head = csv_data[0]
+          var groups = head.split(",")
+          for(i = 0; i < groups.length; i++) {
+              chart_data_obj.push({
+                  key: groups[i],
+                  values: []
+              });
+          }
+          for(j = 1; j < csv_data.length; j++) {
+              g = csv_data[j].split(",");
+              for(k = 0; k < g.length; k++) {
+                  items = g[k].split(";");
+                  var size = 1;
+                  var shape = "circle";
+                  if(items[2] != "") size = items[2];
+                  if(items[3] != "") shape = items[3];
+                  chart_data_obj[k].values.push({
+                      x: items[0],
+                      y: items[1],
+                      size: size,
+                      shape: shape
+                  });
+              }
+          }
+          nv.addGraph(Scatter(chart_data_obj,arg["div"], arg["option"]));
+      }
+  });
+}

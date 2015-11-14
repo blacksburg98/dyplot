@@ -1,4 +1,4 @@
-from dyplot.core import Core 
+from dyplot.c3 import C3 as Core
 import numpy as np
 class Hist(Core):
     """

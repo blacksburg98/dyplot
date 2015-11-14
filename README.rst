@@ -9,25 +9,6 @@ You can clone the source code from
 https://github.com/blacksburg98/dyplot
 The series needs to be pandas.Series
 
-Tutorial 1. 
-===========
-See the output at http://store-demo.appspot.com/tutorial/tutorial1.html 
-::
-
-    import pandas as pd
-    from dyplot.dygraphs import Dygraphs
-    a = pd.Series([1,2,3,4,5,6,7,9,10])
-    b = pd.Series([1,3,5,9,2,8,5,5,15])
-    lc= pd.Series([1,3,4,5,6,7,9,3,2])
-    c = pd.Series([2,4,5,7,8,8,9,4,3])
-    hc= pd.Series([3,5,7,7,9,11,9,5,8])
-    dg = Dygraphs(a.index, "index")
-    dg.plot(series="a", mseries=a)
-    dg.plot(series="b", mseries=b)
-    dg.plot(series="c", mseries=c,lseries=lc, hseries=hc)
-    dg.set_options(title="Test")
-    div = dg.savefig(csv_file="tutorial.csv", html_file="tutorial1.html")
-
 Tutorial 2. 
 ===========
 See the output at http://store-demo.appspot.com/tutorial/tutorial2.html 
@@ -107,38 +88,6 @@ See the output at http://store-demo.appspot.com/tutorial/tutorial4.html
         dg.set_options(title="Tutorial 4", ylabel="Russel 3000", y2label="AAPL")
         div = dg.savefig(csv_file="tutorial4.csv", html_file="tutorial4.html")
 
-Tutorial 5. 
-===========
-See the output at http://store-demo.appspot.com/tutorial/tutorial5.html 
-::
-
-    from dyplot.pie import Pie
-    frac = [30, 20, 50]
-    labels = ["setosa", "versicolor", "viginica"]
-    g = Pie(frac=frac, labels=labels)
-    c = {}
-    c["columns"] = []
-    c["columns"].append(["setosa", 100])
-    g.animate("load", c, 1000)
-    g.savefig(html_file="tutorial5.html")
-Tutorial 6. 
-===========
-See the output at http://store-demo.appspot.com/tutorial/tutorial6.html 
-::
-
-    from dyplot.bar import Bar
-    h = [30, 20, 50, 40]
-    label = "setosa"
-    g = Bar(height=h, label=label)
-    h2 = [50, 30, 20, 30]
-    label2 = "barora"
-    h3 = [40, 20, 10, 50]
-    label3 = "exama"
-    g = Bar(height=h, label=label)
-    g(height=h2, label=label2)
-    g(height=h3, label=label3)
-    g.set_xticklabels(["G1", "G2", "G3", "G4"])
-    g.savefig(html_file="tutorial6.html")
 Tutorial 7. 
 ===========
 See the output at http://store-demo.appspot.com/tutorial/tutorial7.html 

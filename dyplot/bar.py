@@ -1,5 +1,5 @@
-from dyplot.core import Core 
-class Bar(Core):
+from dyplot.c3 import C3 
+class Bar(C3):
     def __init__(self, height, label):
         """ 
             To plot a bar chart.
@@ -9,7 +9,7 @@ class Bar(Core):
             :param label: The name of the data.
             :type label: string 
         """
-        Core.__init__(self)
+        C3.__init__(self)
         self.option["data"]["type"] = "bar"
         columns = []
         columns.append(label)
