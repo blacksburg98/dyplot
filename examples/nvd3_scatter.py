@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 import csv
 from dyplot.scatter import Scatter
 if __name__ == '__main__':
