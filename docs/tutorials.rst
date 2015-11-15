@@ -5,7 +5,7 @@ Plot three series
 -----------------
 See the output at http://blacksburg98.github.io/dyplot/html/tutorial1.html
 
-.. literalinclude:: ../examples/tutorial0.py
+.. literalinclude:: ../examples/tutorial1.py
 
 Pie Chart
 ---------

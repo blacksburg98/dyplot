@@ -13,14 +13,6 @@ dyplot.dygraphs module
     :special-members:
     :show-inheritance:
 
-dyplot.core module
-------------------
-
-.. automodule:: dyplot.core
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 dyplot.bar module
 -----------------
 
