@@ -91,7 +91,7 @@ class Scatter(NVD3):
 <link href="../stylesheets/nv.d3.css" rel="stylesheet">
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script src="../js/d3.min.js"></script>
-<script src="../js/nv.d3.js"></script>
+<script src="../js/nv.d3.min.js"></script>
 <script src="../js/dyplot.js"></script>
 </head><body>
 """

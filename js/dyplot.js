@@ -168,17 +168,19 @@ function scatter_chart(arg) {
           for(j = 1; j < csv_data.length; j++) {
               g = csv_data[j].split(",");
               for(k = 0; k < g.length; k++) {
-                  items = g[k].split(";");
-                  var size = 1;
-                  var shape = "circle";
-                  if(items[2] != "") size = items[2];
-                  if(items[3] != "") shape = items[3];
-                  chart_data_obj[k].values.push({
-                      x: items[0],
-                      y: items[1],
-                      size: size,
-                      shape: shape
-                  });
+                  if(g[k]){
+                      items = g[k].split(";");
+                      var size = 1;
+                      var shape = "circle";
+                      if(items[2] != "") size = items[2];
+                      if(items[3] != "") shape = items[3];
+                      chart_data_obj[k].values.push({
+                          x: items[0],
+                          y: items[1],
+                          size: size,
+                          shape: shape
+                      });
+                  }
               }
           }
           nv.addGraph(Scatter(chart_data_obj,arg["div"], arg["option"]));
