@@ -74,6 +74,8 @@ class Scatter(NVD3):
                 :return div: the html code to be embedded in the webpage is return.
         """
         self.save_csv(csv_file)
+        if csv_url != "":
+            csv_file = csv_url
         options = json.dumps(self.option)
         div = '<style>\n#' + div_id + " svg { height:" + height + "; width: " + width + ";}\n"
         div += '</style>'
