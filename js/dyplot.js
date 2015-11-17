@@ -126,17 +126,13 @@ function Scatter(chart_data_obj, div, option) {
     var chart = nv.models.scatterChart()
                   .showDistX(final_option["showDistX"])    //showDist, when true, will display those little distribution lines on the axis.
                   .showDistY(final_option["showDistY"])
-                  .transitionDuration(final_option["transitionDuration"])
+                  .duration(final_option["transitionDuration"])
+                  .useVoronoi(true)
                   .color(d3.scale.category10().range());
-    //Configure how the tooltip looks.
-    chart.tooltipContent(function(key) {
-        return '<h3>' + key + '</h3>';
-    });
     //Axis settings
     chart.xAxis.tickFormat(d3.format(final_option["xtickformat"]));
     chart.yAxis.tickFormat(d3.format(final_option["ytickformat"]));
     //We want to show shapes other than circles.
-    chart.scatter.onlyCircles(final_option["onlyCircles"]);
     //var myData = randomData(2,40);
     var myData = chart_data_obj
     var div_select = "#".concat(div).concat(" svg")
@@ -144,6 +140,7 @@ function Scatter(chart_data_obj, div, option) {
         .datum(myData)
         .call(chart);
     nv.utils.windowResize(chart.update);
+    chart.dispatch.on('stateChange', function(e) { ('New State:', JSON.stringify(e)); });
     return chart;
 }
 function scatter_chart(arg) {
@@ -154,8 +151,8 @@ function scatter_chart(arg) {
       success: function(data) {
           var csv_data;
           var chart_data_obj = [];
-          d = data.replace(/\r\n|\r/gm, "\n");
-          csv_data = d.split("\n");
+          data = data.replace(/\r\n|\r/gm, "\n");
+          csv_data = data.split("\n");
           csv_data.pop();
           var head = csv_data[0]
           var groups = head.split(",")
