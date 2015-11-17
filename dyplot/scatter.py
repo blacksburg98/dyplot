@@ -63,8 +63,6 @@ class Scatter(NVD3):
                 :type div_id: string
                 :param js_vid: id to be used in javascript
                 :type js_vid: string
-                :param dt_fmt: date-time format if the seriers are time series.
-                :type dt_fmt: string
                 :param html_file: the file name of html file
                 :type html_file: string
                 :param width: The width of the plot. For exampe, "400px".

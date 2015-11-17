@@ -2,8 +2,8 @@ import numpy as np
 import csv
 from dyplot.scatter import Scatter
 if __name__ == '__main__':
-    x = np.random.rand(10)
-    y = np.random.rand(10)
+    x = np.random.rand(20)
+    y = np.random.rand(20)
     s = Scatter(x, y, "Group 1", s=2)
     x = np.random.rand(10)
     y = np.random.rand(10)
