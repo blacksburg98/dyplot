@@ -8,8 +8,9 @@ class Scatter(NVD3):
          'v' : 'triangle-down',
          'D' : 'diamond' ,
          's' : 'square'}
-    def __init__(self, x, y, g,s=1, marker='o', option={}):
+    def __init__(self, x, y, g,s=1, marker='o', slope="", intercept="", option={}):
         """ To plot a scatter chart.
+            If slope and intercept are defined, then a line will be drawn.
 
                 :param x, y: x, y coordinate
                 :type x, y: array_like.
@@ -25,6 +26,10 @@ class Scatter(NVD3):
                 :type marker: string or a list of string
                 :param g: The group name.
                 :type g: string
+                :param slope: The slope of the line.
+                :type slope: float
+                :param intercept: The Y intercept of the line
+                :type intercept: float
         """
         self.option = {
             "showDistX": True,
@@ -37,9 +42,10 @@ class Scatter(NVD3):
         for key in option:
             self.option[key] = option[key]
         self.data = {}
-        self.__call__(x,y,g,s,marker)
+        self.group = {}
+        self.__call__(x,y,g,s,marker,slope,intercept)
 
-    def __call__(self, x, y, g, s=1, marker='o'):
+    def __call__(self, x, y, g, s=1, marker='o', slope="", intercept=""):
         length = len(x)
         if isinstance(s, int):
             sizes = [s] * length
@@ -50,6 +56,7 @@ class Scatter(NVD3):
         else:
             markers = map(lambda x: Scatter.m2s[x], marker)
         group = list(zip(x, y, sizes, markers))
+        self.group[g] = {"slope": str(slope), "intercept": str(intercept)}
         self.data[g] = group
 
     def savefig(self, csv_file="nvd3.csv", div_id="nvd3", html_file=None, width="600px", height="400px", csv_url=""):
@@ -106,7 +113,12 @@ class Scatter(NVD3):
         mlen = 0
         head = []
         for g in self.data:
-            head.append(g)
+            print(self.group[g]["slope"])
+            if self.group[g]["slope"] == "":
+                g_head = g
+            else:
+                g_head = ';'.join([g, self.group[g]["slope"], self.group[g]["intercept"]])
+            head.append(g_head)
             l = len(self.data[g])
             if l > mlen:
                 mlen = l

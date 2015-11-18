@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='dyplot',
-    version='0.8.5',
+    version='0.8.8',
     author='Tsung-Han Yang',
     author_email='blacksburg98@yahoo.com',
     packages=find_packages(),

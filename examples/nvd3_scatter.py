@@ -4,7 +4,7 @@ from dyplot.scatter import Scatter
 if __name__ == '__main__':
     x = np.random.rand(20)
     y = np.random.rand(20)
-    s = Scatter(x, y, "Group 1")
+    s = Scatter(x, y, "Group 1", s=2, slope=-1, intercept=0.9)
     x = np.random.rand(10)
     y = np.random.rand(10)
     s(x, y, "Group 2", marker="+", s=[1,3,2,4,5,6,6,5,4,3])
