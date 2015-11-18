@@ -113,7 +113,6 @@ class Scatter(NVD3):
         mlen = 0
         head = []
         for g in self.data:
-            print(self.group[g]["slope"])
             if self.group[g]["slope"] == "":
                 g_head = g
             else:

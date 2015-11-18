@@ -1,0 +1,4 @@
+[submodule "gh-pages"]
+	path = gh-pages
+	url = https://github.com/blacksburg98/dyplot.git
+	branch = gh-pages
