@@ -154,13 +154,23 @@ function scatter_chart(arg) {
           data = data.replace(/\r\n|\r/gm, "\n");
           csv_data = data.split("\n");
           csv_data.pop();
-          var head = csv_data[0]
-          var groups = head.split(",")
+          var head = csv_data[0];
+          var groups = head.split(",");
           for(i = 0; i < groups.length; i++) {
-              chart_data_obj.push({
-                  key: groups[i],
-                  values: []
-              });
+              line = groups[i].split(";");
+              console.log(line);
+              if(line[1])
+                  chart_data_obj.push({
+                      key: line[0],
+                      values: [],
+                      slope: Number(line[1]),
+                      intercept: Number(line[2])
+                  });
+              else 
+                  chart_data_obj.push({
+                      key: groups[i],
+                      values: []
+                  });
           }
           for(j = 1; j < csv_data.length; j++) {
               g = csv_data[j].split(",");
