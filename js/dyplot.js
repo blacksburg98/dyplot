@@ -126,7 +126,6 @@ function scatter_chart(arg) {
           var groups = head.split(",");
           for(i = 0; i < groups.length; i++) {
               line = groups[i].split(";");
-              console.log(line);
               if(line[1])
                   chart_data_obj.push({
                       key: line[0],
@@ -161,4 +160,47 @@ function scatter_chart(arg) {
           nv.addGraph(Scatter(chart_data_obj,arg["div"], arg["option"]));
       }
   });
+}
+function PieChart(arg) {
+    option = arg["option"];
+    angle = arg["angle"];
+    var chart = nv.models.pieChart()
+        .x(function(d) { return d.key })
+        .y(function(d) { return d.y })
+        //.labelThreshold(.08)
+        //.showLabels(false)
+        .color(d3.scale.category20().range().slice(8))
+        .growOnHover(false)
+        .labelType('value')
+        .width(width)
+        .height(height);
+
+    // make it a half circle
+    dnum = 360/angle;
+    chart.pie
+        .startAngle(function(d) { return d.startAngle/dnum -Math.PI/dnum })
+        .endAngle(function(d) { return d.endAngle/dnum -Math.PI/dnum });
+
+    // MAKES LABELS OUTSIDE OF DONUT
+    //chart.pie.donutLabelsOutside(true).donut(true);
+
+    div = "#".concat(arg["div"]);
+    d3.select(div)
+        .datum(arg["chart_data"])
+        .transition().duration(1200)
+        .attr('width', width)
+        .attr('height', height)
+        .call(chart);
+
+    // disable and enable some of the sections
+    var is_disabled = false;
+    setInterval(function() {
+        chart.dispatch.changeState({disabled: {2: !is_disabled, 4: !is_disabled}});
+        is_disabled = !is_disabled;
+    }, 3000);
+
+    return chart;
+}
+function pie_chart(arg) {
+  nv.addGraph(PieChart(arg));
 }
