@@ -7,8 +7,30 @@
 <script src="../js/dyplot.js"></script>
 </head><body>
 <style>
-#nvd3 svg { height:400px; width: 600px;}
+#nvd3 svg { height: 100%; width: 100%;}
 </style><div id="nvd3"><svg></svg></div>
 <script>
-scatter_chart({chart_data:"nvd3_scatter.csv", div :"nvd3", options:{"ytickformat": ".02f", "onlyCricles": false, "showDistY": true, "xtickformat": ".02f", "showDistX": true, "transitionDuration": 350}})</script>
+function Scatter(chart_data_obj, div, option) {
+    var chart = nv.models.scatterChart()
+    .showDistY(true)
+    .duration(400)
+    .height(600)
+    .width(800)
+    .useVoronoi(true)
+    .color(d3.scale.category10().range())
+    .showDistX(true)
+;
+    chart.xAxis.tickFormat(d3.format('.02f'));
+    chart.yAxis.tickFormat(d3.format('.02f'));
+
+    var myData = chart_data_obj
+    var div_select = "#".concat(div).concat(" svg")
+    d3.select(div_select)
+        .datum(myData)
+        .call(chart);
+    nv.utils.windowResize(chart.update);
+    chart.dispatch.on('stateChange', function(e) { ('New State:', JSON.stringify(e)); });
+    return chart;
+}
+        scatter_chart({chart_data:"nvd3_scatter.csv", div :"nvd3"});</script>
 </body></html>

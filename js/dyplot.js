@@ -111,38 +111,6 @@ function change(el) {
 }
 // Scatter function
 // use nvd3
-function Scatter(chart_data_obj, div, option) {
-    final_option = {
-        showDistX: true,
-        showDistY: true,
-        transitionDuration: 350,
-        xtickformat: '.02f',
-        ytickformat: '.02f',
-        onlyCricles: false
-      };
-    for (var key in option) {
-      final_option[key] = option[key] 
-    }
-    var chart = nv.models.scatterChart()
-                  .showDistX(final_option["showDistX"])    //showDist, when true, will display those little distribution lines on the axis.
-                  .showDistY(final_option["showDistY"])
-                  .duration(final_option["transitionDuration"])
-                  .useVoronoi(true)
-                  .color(d3.scale.category10().range());
-    //Axis settings
-    chart.xAxis.tickFormat(d3.format(final_option["xtickformat"]));
-    chart.yAxis.tickFormat(d3.format(final_option["ytickformat"]));
-    //We want to show shapes other than circles.
-    //var myData = randomData(2,40);
-    var myData = chart_data_obj
-    var div_select = "#".concat(div).concat(" svg")
-    d3.select(div_select)
-        .datum(myData)
-        .call(chart);
-    nv.utils.windowResize(chart.update);
-    chart.dispatch.on('stateChange', function(e) { ('New State:', JSON.stringify(e)); });
-    return chart;
-}
 function scatter_chart(arg) {
   $.ajax({
       type: "GET",
