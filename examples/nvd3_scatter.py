@@ -11,4 +11,5 @@ if __name__ == '__main__':
     x = np.random.rand(10)
     y = np.random.rand(10)
     s(x, y, "Group 3", s=2, marker=["^", 'v', 'o', '+', 's', 's', 's', 'D', 'D', 'v'])
-    s.savefig(csv_file="nvd3_scatter.csv",html_file="nvd3_scatter.html")
+    s.savefig(csv_file="../gh-pages/html/nvd3_scatter.csv",html_file="../gh-pages/html/nvd3_scatter.html"
+        ,csv_url="nvd3_scatter.csv")

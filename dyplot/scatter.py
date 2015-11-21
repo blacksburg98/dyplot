@@ -31,16 +31,22 @@ class Scatter(NVD3):
                 :param intercept: The Y intercept of the line
                 :type intercept: float
         """
-        self.option = {
-            "showDistX": True,
-            "showDistY": True,
-            "transitionDuration": 350,
-            "xtickformat": '.02f',
-            "ytickformat": '.02f',
-            "onlyCricles": False
-        }
-        for key in option:
-            self.option[key] = option[key]
+        self.option = {}
+        self.option["width"] = 800
+        self.option["height"] = 600
+        self.option["showDistX"] = True
+        self.option["showDistY"] = True
+        self.option["duration"] = 400
+        self.option["useVoronoi"] = True
+        self.option["color"] = "d3.scale.category10().range()"
+        self.axis = {}
+        self.axis["xAxis"] = {} 
+        self.axis["xAxis"]["tickFormat"] = "d3.format('.02f')"
+        self.axis["yAxis"] = {} 
+        self.axis["yAxis"]["tickFormat"] = "d3.format('.02f')"
+        if option != {}:
+            for key in option:
+                self.option[key] = option[key]
         self.data = {}
         self.group = {}
         self.__call__(x,y,g,s,marker,slope,intercept)
@@ -81,13 +87,26 @@ class Scatter(NVD3):
         self.save_csv(csv_file)
         if csv_url != "":
             csv_file = csv_url
-        options = json.dumps(self.option)
-        div = '<style>\n#' + div_id + " svg { height:" + height + "; width: " + width + ";}\n"
+        div = '<style>\n#' + div_id + " svg { height: 100%; width: 100%;}\n"
         div += '</style>'
         div += '<div id="' + div_id + '"><svg></svg></div>\n'
         div += '<script>\n'
-        div += 'scatter_chart({chart_data:"' + csv_file + '", div :"' + div_id + '", options:'
-        div += options + '})'
+        options = self.gen_options()
+        div += "function Scatter(chart_data_obj, div, option) {\n"
+        div += "    var chart = nv.models.scatterChart()\n" + options + ";\n"
+        div += self.gen_axis_options()
+        div += """
+    var myData = chart_data_obj
+    var div_select = "#".concat(div).concat(" svg")
+    d3.select(div_select)
+        .datum(myData)
+        .call(chart);
+    nv.utils.windowResize(chart.update);
+    chart.dispatch.on('stateChange', function(e) { ('New State:', JSON.stringify(e)); });
+    return chart;
+}
+        """
+        div += 'scatter_chart({chart_data:"' + csv_file + '", div :"' + div_id + '"});'
         div += '</script>\n'
         if type(html_file) != type(None):
             self._save_html(html_file, div)
