@@ -247,7 +247,7 @@ class Dygraphs():
             :type dt_fmt: string
         """
         csv_series = []
-        if type(self.x[0]) == pandas.tslib.Timestamp:
+        if type(self.x[0]) == pandas.Timestamp:
             csv_series.append([])
             for e in self.x:
                 csv_series[0].append(e.strftime(dt_fmt))
